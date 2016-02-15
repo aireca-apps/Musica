@@ -16,12 +16,12 @@ import com.ipartek.formacion.proyecto.pojo.Estilo;
 /**
  * Servlet implementation class TablaAuxiliarServlet
  */
-public class TablaAuxiliarServlet extends MasterServlet {
+public class EstiloServlet extends MasterServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final String VIEW_LIST = "/pages/auxiliar/auxiliarList.jsp",
-			VIEW_FORM = "/pages/auxiliar/auxiliarForm.jsp";
+	private static final String VIEW_LIST = "/pages/estilo/estiloList.jsp",
+			VIEW_FORM = "/pages/estilo/estiloDetalle.jsp";
 	private static int operacion;
 
 	@Override
@@ -91,19 +91,19 @@ public class TablaAuxiliarServlet extends MasterServlet {
 		String pNombre = request.getParameter("nombre"), pDescripcion = request.getParameter("descripcion"),
 				pCodigo = request.getParameter("codigo");
 
-		// construir rol
-		Estilo pojo = new Estilo(pNombre);
-		pojo.setId(id);
-		pojo.setDescripcion(pDescripcion);
-		pojo.setCodigo(pCodigo);
+		// construir estilo
+		Estilo estilo = new Estilo(pNombre);
+		estilo.setId(id);
+		estilo.setDescripcion(pDescripcion);
+		estilo.setCodigo(pCodigo);
 
 		// persistir en la bbdd
-		if (pojo.getId() == -1)
-			if (serviceEstilo.insertar(pojo))
-				msj = new Mensaje("Rol insertado con éxito", Mensaje.TIPO_SUCCESS);
+		if (estilo.getId() == -1)
+			if (serviceEstilo.insertar(estilo))
+				msj = new Mensaje("Estilo insertado con éxito", Mensaje.TIPO_SUCCESS);
 			else
-				msj = new Mensaje("No se ha insertado el rol", Mensaje.TIPO_WARNING);
-		else if (serviceEstilo.modificar(pojo)) {
+				msj = new Mensaje("No se ha insertado el estilo", Mensaje.TIPO_WARNING);
+		else if (serviceEstilo.modificar(estilo)) {
 			msj = new Mensaje("Registro modificado con éxito", Mensaje.TIPO_SUCCESS);
 		} else {
 			msj = new Mensaje("No se ha modificado el registro", Mensaje.TIPO_WARNING);
@@ -128,15 +128,15 @@ public class TablaAuxiliarServlet extends MasterServlet {
 	}
 
 	private void nuevo(HttpServletRequest request) {
-		Estilo pojo = new Estilo();
-		request.setAttribute("pojo", pojo);
+		Estilo estilo = new Estilo();
+		request.setAttribute("estilo", estilo);
 		dispatch = request.getRequestDispatcher(VIEW_FORM);
 	}
 
 	private void detalle(HttpServletRequest request) throws NumberFormatException, SQLException {
 		String pId = request.getParameter("id");
-		Estilo pojo = serviceEstilo.detalle(Integer.parseInt(pId));
-		request.setAttribute("pojo", pojo);
+		Estilo estilo = serviceEstilo.detalle(Integer.parseInt(pId));
+		request.setAttribute("estilo", estilo);
 		dispatch = request.getRequestDispatcher(VIEW_FORM);
 	}
 

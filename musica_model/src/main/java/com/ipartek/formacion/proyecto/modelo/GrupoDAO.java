@@ -39,7 +39,7 @@ public class GrupoDAO implements Persistable<Grupo> {
 		DbConnection conn = new DbConnection();
 
 		// para llamar a un procedimiento creado en heidy
-		String sql = "{call getPersonasAll (?)}";
+		String sql = "{call getGrupos (?)}";
 		CallableStatement cs = conn.getConnection().prepareCall(sql);
 		cs.setInt(1, 500);
 		ResultSet res = cs.executeQuery();
@@ -123,16 +123,14 @@ public class GrupoDAO implements Persistable<Grupo> {
 		boolean resul = false;
 		if (persistable != null) {
 			DbConnection conn = new DbConnection();
-			String sql = "update `persona` set dni = ?, pass = ?, fecha_nacimiento = ?, observaciones = ?, email = ?, nombre = ?, rol_id = ? where `id` = ? ;";
+			String sql = "update `persona` set nombre = ?, componentes = ?, fecha_inicio = ?,  fecha_fin = ?, estilo_id = ? where `id` = ? ;";
 			PreparedStatement pst = conn.getConnection().prepareStatement(sql);
-			pst.setString(1, persistable.getDni());
-			pst.setString(2, persistable.getPass());
-			pst.setDate(3, (Date) persistable.getFechaNacimiento());
-			pst.setString(4, persistable.getObservaciones());
-			pst.setString(5, persistable.getEmail());
-			pst.setString(6, persistable.getNombre());
-			pst.setInt(7, persistable.getRol().getId());
-			pst.setInt(8, persistable.getId());
+			pst.setString(1, persistable.getNombre());
+			pst.setString(2, persistable.getComponentes());
+			pst.setDate(3, (Date) persistable.getFechaInicio());
+			pst.setDate(4, (Date) persistable.getFechaFin());
+			pst.setInt(5, persistable.getEstilo().getId());
+			pst.setInt(6, persistable.getId());
 			if (pst.executeUpdate() == 1)// Si solo afecta a una línea
 				resul = true;
 		}
@@ -154,7 +152,7 @@ public class GrupoDAO implements Persistable<Grupo> {
 			pst.setString(4, persistable.getObservaciones());
 			pst.setString(5, persistable.getEmail());
 			pst.setString(6, persistable.getNombre());
-			pst.setInt(7, persistable.getRol().getId());
+			pst.setInt(7, persistable.getEstilo().getId());
 			// ejecutar la consulta. Si no afecta a una línea, lanzamos la
 			// excepción
 			if (pst.executeUpdate() != 1)
@@ -185,7 +183,7 @@ public class GrupoDAO implements Persistable<Grupo> {
 			p.setObservaciones(res.getString("observaciones"));
 			p.setEmail(res.getString("email"));
 			p.setFechaNacimiento(res.getDate("fecha_nacimiento"));
-			p.setRol(new Estilo(res.getInt("rol_id"), res.getString("rol_nombre"), res.getString("rol_descripcion"),
+			p.setEstilo(new Estilo(res.getInt("rol_id"), res.getString("rol_nombre"), res.getString("rol_descripcion"),
 					res.getString("rol_codigo")));
 		} catch (Exception e) {
 		}

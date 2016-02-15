@@ -6,31 +6,27 @@ import java.util.GregorianCalendar;
 public class Grupo {
 
 	private int id;
-	private String nombre, dni, pass, observaciones, email;
-	private Date fechaNacimiento;
-	private Estilo rol;
+	private String nombre, componentes;
+	private Date fechaInicio, fechaFin;
+	private Estilo estilo;
 
 	public Grupo() {
 		super();
 		id = -1;
 		this.nombre = "";
-		this.dni = "";
-		this.observaciones = "";
-		this.email = "";
-		this.pass = "";
-		this.rol = null;
+		this.componentes = "";
+		this.estilo = null;
 		GregorianCalendar calendar = new GregorianCalendar(1900, 0, 1);
-		this.fechaNacimiento = new Date(calendar.getTimeInMillis());
+		this.fechaInicio = new Date(calendar.getTimeInMillis());
+		this.fechaFin = this.fechaInicio;
 	}
 
-	public Grupo(String nombre, String dni, String pass, String observaciones, String email, Date fechaNacimiento) {
+	public Grupo(String nombre, String componentes, Date fechaInicio, Date fechaFin) {
 		this();
 		this.nombre = nombre;
-		this.dni = dni;
-		this.pass = pass;
-		this.observaciones = observaciones;
-		this.email = email;
-		this.fechaNacimiento = fechaNacimiento;
+		this.componentes = componentes;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
 	}
 
 	public int getId() {
@@ -49,76 +45,57 @@ public class Grupo {
 		this.nombre = nombre;
 	}
 
-	public String getDni() {
-		return dni;
+	public String getComponentes() {
+		return componentes;
 	}
 
-	public void setDni(String dni) {
-		this.dni = dni;
+	public void setComponentes(String componentes) {
+		this.componentes = componentes;
 	}
 
-	public String getPass() {
-		return pass;
+	public Date getFechaInicio() {
+		return fechaInicio;
 	}
 
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
 	}
 
-	public String getObservaciones() {
-		return observaciones;
+	public Date getFechaFin() {
+		return fechaFin;
 	}
 
-	public void setObservaciones(String observaciones) {
-		this.observaciones = observaciones;
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
 	}
 
-	public String getEmail() {
-		return email;
+	public Estilo getEstilo() {
+		return estilo;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
-
-	public Estilo getRol() {
-		return rol;
-	}
-
-	public void setRol(Estilo rol) {
-		this.rol = rol;
-	}
-
-	@Override
-	public String toString() {
-		return "Persona [id=" + id + ", nombre=" + nombre + ", dni=" + dni + ", pass=" + pass + ", observaciones="
-				+ observaciones + ", email=" + email + ", fechaNacimiento=" + fechaNacimiento + "]";
+	public void setEstilo(Estilo estilo) {
+		this.estilo = estilo;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = (prime * result) + ((dni == null) ? 0 : dni.hashCode());
-		result = (prime * result) + ((email == null) ? 0 : email.hashCode());
-		result = (prime * result) + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
+		result = (prime * result) + ((componentes == null) ? 0 : componentes.hashCode());
+		result = (prime * result) + ((estilo == null) ? 0 : estilo.hashCode());
+		result = (prime * result) + ((fechaFin == null) ? 0 : fechaFin.hashCode());
+		result = (prime * result) + ((fechaInicio == null) ? 0 : fechaInicio.hashCode());
 		result = (prime * result) + id;
 		result = (prime * result) + ((nombre == null) ? 0 : nombre.hashCode());
-		result = (prime * result) + ((observaciones == null) ? 0 : observaciones.hashCode());
-		result = (prime * result) + ((pass == null) ? 0 : pass.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		return this.hashCode() == obj.hashCode();
+		boolean resul = false;
+		if (obj != null) {
+			resul = this.hashCode() == obj.hashCode();
+		}
+		return resul;
 	}
 }

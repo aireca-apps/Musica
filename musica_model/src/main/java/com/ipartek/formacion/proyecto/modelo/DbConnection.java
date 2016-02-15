@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 public class DbConnection {
 	private final static Logger LOG = Logger.getLogger(DbConnection.class);
 	/** Parametros de conexion */
-	private static String bd = "iparsex", login = "root", password = "", url = "jdbc:mysql://localhost/" + bd;
+	private static String bd = "aitor", login = "root", password = "", url = "jdbc:mysql://localhost/" + bd;
 
 	private Connection connection = null;
 

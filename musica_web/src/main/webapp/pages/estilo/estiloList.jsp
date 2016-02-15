@@ -12,15 +12,15 @@
 	<%@include file="/includes/mensaje.jsp"%>
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Rol</h1>
+			<h1 class="page-header">Estilo</h1>
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<i class="fa fa-user fa-fw"></i> Listado de Roles
+				<i class="fa fa-user fa-fw"></i> Listado de Estilos
 				<div class="pull-right">
 					<div class="btn-group">
 						<button type="button" class="btn btn-default btn-xs">
-							<a href="back/roles?op=<%=Constantes.OP_NUEVO%>"
+							<a href="musica/estilos?op=<%=Constantes.OP_NUEVO%>"
 								title="Crear registro"> <i class="fa fa-plus fa-fw"></i>
 								Crear nuevo Registro
 							</a>
@@ -50,14 +50,14 @@
 								lista = new ArrayList<Estilo>();
 
 							for (int i = 1; i <= lista.size(); i++) {
-								Estilo pojo = lista.get(i - 1);
+								Estilo estilo = lista.get(i - 1);
 						%>
 						<tr>
 							<td><%=i%></td>
 							<td><a
-								href="<%=Constantes.CONTROLLER_ROLES%>?op=<%=Constantes.OP_DETALLE%>&id=<%=pojo.getId()%>"
-								title="Ir al detalle de <%=pojo.getNombre()%>"><%=pojo.getNombre()%></a></td>
-							<td><%=pojo.getCodigo()%></td>
+								href="<%=Constantes.CONTROLLER_ESTILOS%>?op=<%=Constantes.OP_DETALLE%>&id=<%=estilo.getId()%>"
+								title="Ir al detalle de <%=estilo.getNombre()%>"><%=estilo.getNombre()%></a></td>
+							<td><%=estilo.getCodigo()%></td>
 						</tr>
 						<%
 							} //end for

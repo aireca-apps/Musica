@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>BackofficeWar</display-name>
+  <display-name>TuMusica</display-name>
   
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>
@@ -37,14 +37,14 @@
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description>Controlador para gestionar las operaciones sobre usuarios</description>
-    <display-name>UsuarioServlet</display-name>
-    <servlet-name>UsuarioServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.proyecto.controladores.UsuarioServlet</servlet-class>
+    <description>Controlador para gestionar las operaciones sobre grupos</description>
+    <display-name>GrupoServlet</display-name>
+    <servlet-name>GrupoServlet</servlet-name>
+    <servlet-class>com.ipartek.formacion.proyecto.controladores.GrupoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>UsuarioServlet</servlet-name>
-    <url-pattern>/back/usuarios</url-pattern>
+    <servlet-name>GrupoServlet</servlet-name>
+    <url-pattern>/musica/grupos</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -54,17 +54,17 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>SearchServlet</servlet-name>
-    <url-pattern>/back/search</url-pattern>
+    <url-pattern>/musica/search</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description>Controlador para gestionar las operaciones sobre roles</description>
-    <display-name>TablaAuxiliarServlet</display-name>
-    <servlet-name>TablaAuxiliarServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.proyecto.controladores.TablaAuxiliarServlet</servlet-class>
+    <description>Controlador para gestionar las operaciones sobre estilos</description>
+    <display-name>EstiloServlet</display-name>
+    <servlet-name>EstiloServlet</servlet-name>
+    <servlet-class>com.ipartek.formacion.proyecto.controladores.EstiloServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>TablaAuxiliarServlet</servlet-name>
-    <url-pattern>/back/roles</url-pattern>
+    <servlet-name>EstiloServlet</servlet-name>
+    <url-pattern>/musica/estilos</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -74,7 +74,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>LoggedUserServlet</servlet-name>
-    <url-pattern>/back/loggeduser</url-pattern>
+    <url-pattern>/musica/loggeduser</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -107,7 +107,7 @@
   </filter>
   <filter-mapping>
     <filter-name>UserLoggedFilter</filter-name>
-    <url-pattern>/back/*</url-pattern>
+    <url-pattern>/musica/*</url-pattern>
   </filter-mapping>
   <filter-mapping>
     <filter-name>UserLoggedFilter</filter-name>

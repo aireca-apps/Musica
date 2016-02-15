@@ -29,10 +29,10 @@
 					<fmt:message key="index.lateral.principal"/></a></li>
 			<li>
 				<!-- vamos a llamar al controlador en lugar del jsp --> <a
-				href="<%=Constantes.CONTROLLER_USUARIOS%>"><i class="fa fa-user fa-fw"></i> <fmt:message key="index.lateral.usuarios"/></a>
+				href="<%=Constantes.CONTROLLER_GRUPOS%>"><i class="fa fa-user fa-fw"></i> <fmt:message key="index.lateral.grupos"/></a>
 			</li>
-			<li><a href="<%=Constantes.CONTROLLER_ROLES%>"><i
-					class="fa fa-graduation-cap fa-fw"></i> <fmt:message key="index.lateral.roles"/></a></li>
+			<li><a href="<%=Constantes.CONTROLLER_ESTILOS%>"><i
+					class="fa fa-graduation-cap fa-fw"></i> <fmt:message key="index.lateral.estilos"/></a></li>
 		</ul>
 	</div>
 	<!-- /.sidebar-collapse -->

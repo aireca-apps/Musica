@@ -16,7 +16,7 @@ public final class Constantes {
 	}
 
 	// Generales
-	public static final String APP_NAME = "BackofficeWar";
+	public static final String APP_NAME = "TuMusica";
 	// public static final String SERVER = "http://localhost:8080/";
 	public static final String ROOT = /* SERVER + */"/" + APP_NAME + "/";
 
@@ -35,18 +35,18 @@ public final class Constantes {
 	public static final String CONTROLLER_LOGIN = "loginUser";
 	public static final String CONTROLLER_LOGOUT = "logout";
 
-	public static final String CONTROLLER_USUARIOS_LOGEADOS = "back/loggeduser";
+	public static final String CONTROLLER_USUARIOS_LOGEADOS = "musica/loggeduser";
 
-	public static final String CONTROLLER_USUARIOS = "back/usuarios";
-	public static final String CONTROLLER_ROLES = "back/roles";
-	public static final String CONTROLLER_SEARCH = "back/search";
+	public static final String CONTROLLER_GRUPOS = "musica/grupos";
+	public static final String CONTROLLER_ESTILOS = "musica/estilos";
+	public static final String CONTROLLER_SEARCH = "musica/search";
 
 	// VISTAS
 	public static final String VIEW_LOGIN = "login.jsp";
 	public static final String VIEW_INDEX = "index.jsp";
 
-	public static final String VIEW_USER_LIST = "/pages/users/usuarios.jsp";
-	public static final String VIEW_USER_FORM = "/pages/users/usuarioDetalle.jsp";
-	public static final String VIEW_USER_SEARCH = "/pages/searchResult.jsp";
+	public static final String VIEW_GRUPO_LIST = "/pages/grupo/grupos.jsp";
+	public static final String VIEW_GRUPO_FORM = "/pages/grupo/grupoDetalle.jsp";
+	public static final String VIEW_GRUPO_SEARCH = "/pages/searchResult.jsp";
 
 }

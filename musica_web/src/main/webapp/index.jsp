@@ -67,13 +67,13 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><%= SessionListener.listaUsariosLogeados.size() %></div>
-                                    <div><fmt:message key="index.detalle.usuario"/></div>
+                                    <div><fmt:message key="index.detalle.grupo"/></div>
                                 </div>
                             </div>
                         </div>
-                        <a data-toggle="collapse" data-target="#tablaUsuarios">
+                        <a data-toggle="collapse" data-target="#tablaGrupos">
                             <div class="panel-footer">
-                                <span class="pull-left"><fmt:message key="index.usuario"/></span>
+                                <span class="pull-left"><fmt:message key="index.grupo"/></span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
@@ -99,7 +99,7 @@
 	</div>
 	<hr>
 	<!-- /.row -->
-	<div id="tablaUsuarios" class="collapse">
+	<div id="tablaGrupos" class="collapse">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="table-responsive">
@@ -109,7 +109,7 @@
 							<tr>
 								<th>Nombre</th>
 								<th>Email</th>
-								<th>Rol</th>
+								<th>Estilo</th>
 							</tr>
 						</thead>
 						<tbody id="lista_user_logged">
@@ -118,13 +118,13 @@
 							%>
 							<tr>
 								<td><a
-									href="<%=Constantes.CONTROLLER_USUARIOS%>?op=<%=Constantes.OP_DETALLE%>&id=<%=per.getId()%>"
+									href="<%=Constantes.CONTROLLER_GRUPOS%>?op=<%=Constantes.OP_DETALLE%>&id=<%=per.getId()%>"
 									title="Ir al detalle de <%=per.getNombre()%>"><%=per.getNombre()%></a></td>
 								<td><%=per.getEmail()%></td>
 								<td><a
-									href="<%=Constantes.CONTROLLER_ROLES%>?op=<%=Constantes.OP_DETALLE%>&id=<%=per.getRol().getId()%>"
-									title="Ir al detalle de <%=per.getRol().getNombre()%>"
-									style="margin: 10px 0;"><%=per.getRol().getNombre()%></td>
+									href="<%=Constantes.CONTROLLER_ESTILOS%>?op=<%=Constantes.OP_DETALLE%>&id=<%=per.getEstilo().getId()%>"
+									title="Ir al detalle de <%=per.getEstilo().getNombre()%>"
+									style="margin: 10px 0;"><%=per.getEstilo().getNombre()%></td>
 							</tr>
 							<%
 								} //end for
@@ -141,121 +141,6 @@
 <%@include file="includes/footer.jsp"%>
 
 
-
-<script>
-
-	/* Se ejecuta cuando la pagina esta cargada totalmente */
-	$(function() {		
-	 	
-	 	setInterval( refreshUserLogged , 5000);
-	 	tratarDatos();
-	 	
-	 	$('#botonActualizacoinGrafica').on('click',tratarDatos);
-	});
-
-	var controllerUsuarios = "<%=Constantes.CONTROLLER_USUARIOS%>";
-	var controllerRoles = "<%=Constantes.CONTROLLER_ROLES%>";
-	var operacionDetalle = "<%=Constantes.OP_DETALLE%>";
-	
-	var chartData = null;
-	
-	function tratarDatos(){
-	
-		$.ajax("<%=Constantes.CONTROLLER_USUARIOS_LOGEADOS%>", {
-			"type" : "get",
-			"success" : function(result) {
-				chartData = {};				
-				//chart['c'] = (chart['c'] == null) ? 1 : chart['c']++
-				$.each(result, function(key, value) {
-				var aux = chartData[value.rol.nombre]
-				
-				if (aux == undefined){
-					aux = 1;
-				}else{
-					aux++;
-				}
-				chartData[value.rol.nombre] = aux;
-
-				});
-				printChart(chartData);
-			},
-			"error" : function(result) {
-				console.error("Este callback maneja los errores", result);
-			},
-			// "data": { p1 : "Volando vengo"},
-			"async" : true,
-		});
-
-	}
-	
-	function printChart(data){
-		var finalData = [];
-		var ctx = document.getElementById("chart-area").getContext("2d");
-		$.each(data, function(key, value) {
-			finalData.push(
-					{
-						value: value,
-					 	label: key
-					});
-		});
-//		Chart.defaults.global.responsive = true;
-		window.myPie = new Chart(ctx).Pie(finalData);
-	}
-	
-	/*
-	   Llamda Ajax para mostrar los usuarios logeados
-	*/
-	function refreshUserLogged(){
-		
-		
-		$('#lista_user_logged').html('');
-		
-		//url => loggeduser
-		
-		$.ajax("<%=Constantes.CONTROLLER_USUARIOS_LOGEADOS%>", {
-			"type" : "get",
-			"success" : function(result) {
-				console.log("Llego el contenido y no hubo error", result);
-
-				$.each(result,
-						function(key, value) {
-
-							//http://localhost:8080/BackofficeSbAdminBoostrap/undefined?op=undefined&id=Zulema%20Vargo%20La%20L%C3%ADnea%20De%20La%20Concepci%C3%B3n
-							var item = "<tr>";
-							item += "<td><a ";
-							item += "href='" + controllerUsuarios + "?op="
-									+ operacionDetalle + "&id=" + value.id
-									+ "' ";
-							item += "title='Ir al detalle de " + value.nombre
-									+ "'";
-							item += "style='margin: 10px 0;'>" + value.nombre
-									+ "</td>";
-							//var item = "<li>" + value.nombre + "</li>";
-							item += "<td>" + value.email + "</td>";
-							item += "<td><a "
-							item += "href='" + controllerRoles + "?op="
-									+ operacionDetalle + "&id=" + value.rol.id
-									+ "' ";
-							item += "title='Ir al detalle de "
-									+ value.rol.nombre + "' '";
-							item += "style='margin: 10px 0;'>"
-									+ value.rol.nombre + "</td>";
-							item += "</tr>"
-
-							$('#lista_user_logged').append(item);
-
-						});
-
-			},
-			"error" : function(result) {
-				console.error("Este callback maneja los errores", result);
-			},
-			// "data": { p1 : "Volando vengo"},
-			"async" : true,
-		});
-
-	}
-</script>
 
 
 

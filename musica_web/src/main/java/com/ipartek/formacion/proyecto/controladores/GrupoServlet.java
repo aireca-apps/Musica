@@ -18,11 +18,11 @@ import com.ipartek.formacion.proyecto.pojo.Grupo;
 /**
  * Servlet implementation class UsuarioServlet
  */
-public class UsuarioServlet extends MasterServlet {
+public class GrupoServlet extends MasterServlet {
 
 	private static final long serialVersionUID = 8772839050207508062L;
 
-	private static String pId; // Parámetro identificador del usuario, aunque
+	private static String pId; // Parámetro identificador del grupo, aunque
 								// sea un id, es un string, luego se parsea
 	private static int operacion;
 
@@ -84,13 +84,14 @@ public class UsuarioServlet extends MasterServlet {
 	private void modificarCrear(HttpServletRequest request) throws ParseException, SQLException {
 
 		// recoger parámetros formulario
-		int id = Integer.parseInt(request.getParameter("id")), rolId = Integer.parseInt(request.getParameter("rol"));
+		int id = Integer.parseInt(request.getParameter("id")),
+				estiloId = Integer.parseInt(request.getParameter("estilo"));
 		String pNombre = request.getParameter("nombre"), pDni = request.getParameter("dni"),
 				pPass = request.getParameter("pass"), pEmail = request.getParameter("email"),
 				pObservaciones = request.getParameter("observaciones"), pFecha = request.getParameter("fecha");
 
-		Estilo rol = serviceEstilo.detalle(rolId);
-		if (rol.getId() != -1) {
+		Estilo estilo = serviceEstilo.detalle(estiloId);
+		if (estilo.getId() != -1) {
 			// construir persona
 			Grupo per = new Grupo();
 			per.setId(id);
@@ -99,16 +100,16 @@ public class UsuarioServlet extends MasterServlet {
 			per.setPass(pPass);
 			per.setEmail(pEmail);
 			per.setObservaciones(pObservaciones);
-			per.setRol(rol);
+			per.setEstilo(estilo);
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 			java.util.Date parsed = format.parse(pFecha);
 			per.setFechaNacimiento(new java.sql.Date(parsed.getTime()));
 			// persistir en la bbdd
 			if (per.getId() == -1)
 				if (servicioGrupo.insertar(per))
-					msj = new Mensaje("Usuario insertado con éxito", Mensaje.TIPO_SUCCESS);
+					msj = new Mensaje("Grupo insertado con éxito", Mensaje.TIPO_SUCCESS);
 				else
-					msj = new Mensaje("No se ha insertado el usuario", Mensaje.TIPO_WARNING);
+					msj = new Mensaje("No se ha insertado el grupo", Mensaje.TIPO_WARNING);
 			else if (servicioGrupo.modificar(per)) {
 				msj = new Mensaje("Registro modificado con éxito", Mensaje.TIPO_SUCCESS);
 			} else {
@@ -132,7 +133,7 @@ public class UsuarioServlet extends MasterServlet {
 					msj = new Mensaje("No se ha eliminado el registro", Mensaje.TIPO_DANGER);
 				}
 			} else {
-				msj = new Mensaje("No existe un usuario con ese registro", Mensaje.TIPO_DANGER);
+				msj = new Mensaje("No existe un grupo con ese registro", Mensaje.TIPO_DANGER);
 			}
 		} catch (Exception e) {
 			msj = new Mensaje("No se ha eliminado el registro", Mensaje.TIPO_DANGER);
@@ -149,28 +150,27 @@ public class UsuarioServlet extends MasterServlet {
 	private void nuevo(HttpServletRequest request) throws SQLException {
 		Grupo p = new Grupo();
 		request.setAttribute("persona", p);
-		ArrayList<Estilo> roles = (ArrayList<Estilo>) serviceEstilo.listar();
-		request.setAttribute("roles", roles);
-		dispatch = request.getRequestDispatcher(Constantes.VIEW_USER_FORM);
+		ArrayList<Estilo> estilos = (ArrayList<Estilo>) serviceEstilo.listar();
+		request.setAttribute("estilos", estilos);
+		dispatch = request.getRequestDispatcher(Constantes.VIEW_GRUPO_FORM);
 	}
 
 	private void listar(HttpServletRequest request) throws SQLException {
 
 		// Guardar listado (se obtiene del servicio) como atributo en request
-		request.setAttribute("listaUsuarios", servicioGrupo.listar());
+		request.setAttribute("listaGrupos", servicioGrupo.listar());
 
 		// Petición interna a la jsp (RequestDistapecher es para decirle a donde
 		// tiene que ir, se carga el dispatcher)
-		dispatch = request.getRequestDispatcher(Constantes.VIEW_USER_LIST);
+		dispatch = request.getRequestDispatcher(Constantes.VIEW_GRUPO_LIST);
 	}
 
 	private void detalle(HttpServletRequest request) throws NumberFormatException, SQLException {
 		pId = request.getParameter("id");
 		request.setAttribute("persona", servicioGrupo.detalle(Integer.parseInt(pId)));
-		// TODO servicio para roles
-		ArrayList<Estilo> roles = (ArrayList<Estilo>) serviceEstilo.listar();
-		request.setAttribute("roles", roles);
-		dispatch = request.getRequestDispatcher(Constantes.VIEW_USER_FORM);
+		ArrayList<Estilo> estilos = (ArrayList<Estilo>) serviceEstilo.listar();
+		request.setAttribute("estilos", estilos);
+		dispatch = request.getRequestDispatcher(Constantes.VIEW_GRUPO_FORM);
 	}
 
 	/**

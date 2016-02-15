@@ -60,7 +60,7 @@ public class LoginTest {
 		per.setEmail(data + "@" + data + ".com");
 		per.setFechaNacimiento(new Date(System.currentTimeMillis()));
 		per.setPass(data);
-		per.setRol(rol);
+		per.setEstilo(rol);
 
 		try {
 			idU = daoPersona.insert(per);

@@ -24,7 +24,7 @@
 		</div>
 
 		<!-- Formularios -->
-		<form method="post" id="usuario-detalle" action="back/usuarios">
+		<form method="post" id="grupo-detalle" action="musica/grupos">
 
 			<div class="form-group">
 				<label for="id" class="col-sm-2 control-label"
@@ -36,18 +36,18 @@
 			</div>
 
 			<div class="form-group">
-				<label for="rol" class="col-sm-2 control-label"
-					style="margin: 10px 0;">Rol</label>
+				<label for="estilo" class="col-sm-2 control-label"
+					style="margin: 10px 0;">Estilo</label>
 				<div class="col-sm-10">
-					<select class="form-control" name="rol" 
+					<select class="form-control" name="estilo" 
 						style="margin: 10px 0;">
 						<%
-							for (Estilo rol : (ArrayList<Estilo>) request.getAttribute("roles")){
+							for (Estilo estilo : (ArrayList<Estilo>) request.getAttribute("estilos")){
 						%>
-						<option value="<%=rol.getId()%>"
-							<%try{ if (rol.getNombre().equals(per.getRol().getNombre())) {%>
+						<option value="<%=estilo.getId()%>"
+							<%try{ if (estilo.getNombre().equals(per.getEstilo().getNombre())) {%>
 							selected <%}}catch(Exception e){}%> style="margin: 10px 0;">
-							<%=rol.getNombre()%></option>
+							<%=estilo.getNombre()%></option>
 						<%
 							}
 						%>
@@ -168,15 +168,15 @@
 							<span aria-hidden="true">×</span><span class="sr-only">Cerrar</span>
 						</button>
 						<h4 class="modal-title" id="myModalLabel">Eliminación de
-							usuario</h4>
+							grupo</h4>
 					</div>
 					<div id="nuevaAventura" class="modal-body">
-						<form method="post" action="back/usuarios">
+						<form method="post" action="musica/grupos">
 							<div class="form-group">
 								<input type="hidden" name="op"
 									value="<%=Constantes.OP_ELIMINAR%>"> <input
 									type="hidden" name="id" value="<%=per.getId()%>"> <label
-									for="aviso">¿Está seguro que desea eliminar al usuario?
+									for="aviso">¿Está seguro que desea eliminar al grupo?
 									Esta acción no se puede deshacer.</label>
 								<button type="submit" class="btn btn-danger" id="eliminacion"
 									style="margin: 10px 0;">Eliminar</button>

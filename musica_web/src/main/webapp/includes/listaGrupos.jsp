@@ -19,13 +19,13 @@
 							<th>DNI</th>
 							<th>Email</th>							
 							<th>Fecha de Nac.</th>
-							<th>Rol</th>
+							<th>Estilo</th>
 						</tr>
 					</thead>
 					<tbody>
 						<%
 							//recoger "atributo listado personas de la request
-							ArrayList<Grupo> lista = (ArrayList<Grupo>) request.getAttribute("listaUsuarios");
+							ArrayList<Grupo> lista = (ArrayList<Grupo>) request.getAttribute("listaGrupos");
 							if (lista == null)
 								lista = new ArrayList<Grupo>();
 
@@ -34,7 +34,7 @@
 						%>
 						<tr>
 							<td><a
-								href="<%=Constantes.CONTROLLER_USUARIOS%>?op=<%=Constantes.OP_DETALLE%>&id=<%=per.getId()%>"
+								href="<%=Constantes.CONTROLLER_GRUPOS%>?op=<%=Constantes.OP_DETALLE%>&id=<%=per.getId()%>"
 								title="Ir al detalle de <%=per.getNombre()%>"><%=per.getNombre()%></a></td>
 							<td><%=per.getDni()%></td>
 							<td><%=per.getEmail()%></td>
@@ -43,8 +43,8 @@
 								Calendar cal = Calendar.getInstance();
 									cal.setTime(per.getFechaNacimiento());
 							%>
-							<td><a href="<%=Constantes.CONTROLLER_ROLES%>?op=<%=Constantes.OP_DETALLE%>&id=<%=per.getRol().getId()%>"
-								title="Ir al detalle de <%=per.getRol().getNombre()%>" style="margin: 10px 0;"><%=per.getRol().getNombre()%></td>
+							<td><a href="<%=Constantes.CONTROLLER_ESTILOS%>?op=<%=Constantes.OP_DETALLE%>&id=<%=per.getEstilo().getId()%>"
+								title="Ir al detalle de <%=per.getEstilo().getNombre()%>" style="margin: 10px 0;"><%=per.getEstilo().getNombre()%></td>
 						</tr>
 						<%
 							} //end for

@@ -9,23 +9,21 @@
 	<div class="row">
 		<div class="col-lg-12">
 
-			<%	//La línea de abajo equivaldría a: Rol pojo = (Rol) request.getAttribute("pojo");%>
-			<c:set var="pojo" value="${requestScope.pojo}" scope="request" />
-			<%	//La línea de abajo equivaldría a: boolean isNew = (pojo.getId() == -1);%>
-			<c:set var="isNew" value="${pojo.id == -1 ? true: false}" />
+			<c:set var="estilo" value="${requestScope.estilo}" scope="request" />
+			<c:set var="isNew" value="${estilo.id == -1 ? true: false}" />
 			
-			<h1 class="page-header">${pojo.nombre}</h1>
+			<h1 class="page-header">${estilo.nombre}</h1>
 		</div>
 
 		<!-- Formularios -->
-		<form method="post" id="auxiliar-detalle" action="<%=Constantes.CONTROLLER_ROLES%>">
+		<form method="post" id="estilo-detalle" action="<%=Constantes.CONTROLLER_ESTILOS%>">
 
 			<div class="form-group">
 				<label for="id" class="col-sm-2 control-label"
 					style="margin: 10px 0;">ID</label>
 				<div class="col-sm-10">
 					<label for="id" class="col-sm-2 control-label"
-						style="margin: 10px 0;">${pojo.id}</label>
+						style="margin: 10px 0;">${estilo.id}</label>
 				</div>
 			</div>
 
@@ -34,7 +32,7 @@
 					style="margin: 10px 0;">Nombre</label>
 				<div class="col-sm-10">
 					<input class="form-control" id="nombre" type="text" name="nombre" placeholder="Escribe tu nombre" max="50"
-						value="${pojo.nombre}" required
+						value="${estilo.nombre}" required
 						pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" style="margin: 10px 0;"
 						autofocus>
 				</div>
@@ -45,7 +43,7 @@
 					style="margin: 10px 0;">Código</label>
 				<div class="col-sm-10">
 					<input class="form-control" id="codigo" type="text" name="codigo" placeholder="Escribe el código"
-						value="${pojo.codigo}" required style="margin: 10px 0;">
+						value="${estilo.codigo}" required style="margin: 10px 0;">
 				</div>
 			</div>
 			
@@ -54,15 +52,15 @@
 					style="margin: 80px 0;">Descripción</label>
 				<div class="col-sm-10">
 					<textarea class="form-control" cols="20" rows="4" max="255" name="descripcion"
-						placeholder="Escribe algo" style="margin: 10px 0;">${pojo.descripcion}</textarea>
+						placeholder="Escribe algo" style="margin: 10px 0;">${estilo.descripcion}</textarea>
 				</div>
 			</div>
 
 
-			<input type="hidden" name="id" value="${pojo.id}"> <input
-				type="hidden" name="nombre" value="${pojo.nombre}"> <input
-				type="hidden" name="codigo" value="${pojo.codigo}"> <input
-				type="hidden" name="descripcion" value="${pojo.descripcion}"><input
+			<input type="hidden" name="id" value="${estilo.id}"> <input
+				type="hidden" name="nombre" value="${estilo.nombre}"> <input
+				type="hidden" name="codigo" value="${estilo.codigo}"> <input
+				type="hidden" name="descripcion" value="${estilo.descripcion}"><input
 				type="hidden" name="op"
 				value="<%=Constantes.OP_MODIFICAR%>">
 				
@@ -94,11 +92,11 @@
 							registro</h4>
 					</div>
 					<div id="nuevaAventura" class="modal-body">
-						<form method="post" action="back/roles">
+						<form method="post" action="musica/estilos">
 							<div class="form-group">
 								<input type="hidden" name="op"
 									value="4"> <input
-									type="hidden" name="id" value="${pojo.id}"> <label
+									type="hidden" name="id" value="${estilo.id}"> <label
 									for="aviso">¿Está seguro que desea eliminar el registro?
 									Esta acción no se puede deshacer.</label>
 								<button type="submit" class="btn btn-danger" id="eliminacion"

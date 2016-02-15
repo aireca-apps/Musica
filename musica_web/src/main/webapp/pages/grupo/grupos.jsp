@@ -6,23 +6,23 @@
 	<%@include file="/includes/mensaje.jsp"%>
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Usuarios</h1>
+			<h1 class="page-header">Grupos</h1>
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<i class="fa fa-user fa-fw"></i> Últimos 500 usuarios inscritos.
+				<i class="fa fa-user fa-fw"></i> Últimos 500 grupos inscritos.
 				<div class="pull-right">
 					<div class="btn-group">
 						<button type="button" class="btn btn-default btn-xs">
-							<a href="<%=Constantes.CONTROLLER_USUARIOS%>?op=<%=Constantes.OP_NUEVO%>"
+							<a href="<%=Constantes.CONTROLLER_GRUPOS%>?op=<%=Constantes.OP_NUEVO%>"
 								title="Crear registro"> <i class="fa fa-plus fa-fw"></i>
-								Añadir Usuario
+								Añadir Grupo
 							</a>
 						</button>
 					</div>
 				</div>
 			</div>
-			<%@include file="/includes/listaUsuarios.jsp"%>
+			<%@include file="/includes/listaGrupos.jsp"%>
 
 		</div>
 	</div>

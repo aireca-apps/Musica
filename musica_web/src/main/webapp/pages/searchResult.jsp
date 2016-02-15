@@ -14,7 +14,7 @@
 					</div>
 				</div>
 			</div>
-			<%@include file="/includes/listaUsuarios.jsp"%>
+			<%@include file="/includes/listaGrupos.jsp"%>
 		</div>
 		<!-- div id="search-result" -->
 	</div>

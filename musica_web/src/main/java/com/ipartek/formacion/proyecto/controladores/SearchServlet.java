@@ -75,13 +75,13 @@ public class SearchServlet extends MasterServlet {
 		// Guardar el listado como atributo en request
 		String criterio = request.getParameter("criterio");
 		LOG.debug("Buscando criterio " + criterio);
-		ArrayList<Grupo> listaUsers = new ArrayList<Grupo>();
-		listaUsers = (ArrayList<Grupo>) servicioGrupo.buscar(criterio);
+		ArrayList<Grupo> listaGrupos = new ArrayList<Grupo>();
+		listaGrupos = (ArrayList<Grupo>) servicioGrupo.buscar(criterio);
 		// cargamos la jsp
 		request.setCharacterEncoding("UTF-8");
-		request.setAttribute("listaUsuarios", listaUsers);
+		request.setAttribute("listaGrupos", listaGrupos);
 		request.setAttribute("criterio", criterio);
-		request.getRequestDispatcher(Constantes.VIEW_USER_SEARCH).forward(request, response);
+		request.getRequestDispatcher(Constantes.VIEW_GRUPO_SEARCH).forward(request, response);
 	}
 
 }

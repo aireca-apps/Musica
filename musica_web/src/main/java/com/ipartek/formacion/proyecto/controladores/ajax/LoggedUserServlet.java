@@ -15,32 +15,34 @@ import com.ipartek.formacion.proyecto.listeners.SessionListener;
  * Servlet implementation class LoggedUserServlet
  */
 public class LoggedUserServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;       
-   
+	private static final long serialVersionUID = 1L;
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
-		
+
 		PrintWriter out = response.getWriter();
-		
-		//String p1 = request.getParameter("p1");		
-		//String respuesta = "{\"clave\": \"volando voy " + p1 + " \"}";		
-		//out.print(respuesta);
-		
+
 		Gson gson = new Gson();
-		String repuesta = gson.toJson( SessionListener.listaUsariosLogeados );		
+		String repuesta = gson.toJson(SessionListener.listaUsariosLogeados);
 		out.print(repuesta);
-		out.flush();		
+		out.flush();
 	}
 }
