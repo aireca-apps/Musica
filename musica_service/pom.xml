@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.ipartek.proyecto.musica</groupId>
+		<groupId>com.ipartek.proyecto</groupId>
 		<artifactId>musica</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
@@ -13,7 +13,7 @@
 	<dependencies>
 		<!-- Dependencia al back-model -->
 		<dependency>
-			<groupId>com.ipartek.proyecto.musica</groupId>
+			<groupId>com.ipartek.proyecto</groupId>
 			<artifactId>musica_model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

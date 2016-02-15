@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page
-	import="com.ipartek.formacion.backoffice.Constantes"%>
-<%@page import="com.ipartek.formacion.backoffice.pojo.Rol"%>
+	import="com.ipartek.formacion.proyecto.Constantes"%>
+<%@page import="com.ipartek.formacion.proyecto.pojo.Estilo"%>
 <%@include file="/includes/head.jsp"%>
 
 <div id="page-wrapper">

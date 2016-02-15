@@ -1,11 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@page
-	import="com.ipartek.formacion.backoffice.Constantes"%>
+	import="com.ipartek.formacion.proyecto.Constantes"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.ipartek.formacion.backoffice.pojo.Rol"%>
+<%@page import="com.ipartek.formacion.proyecto.pojo.Estilo"%>
 <%@include file="/includes/head.jsp"%>
 
 <div id="page-wrapper">
@@ -45,12 +45,12 @@
 					<tbody>
 						<%
 							//recoger "atributo listado personas de la request
-							ArrayList<Rol> lista = (ArrayList<Rol>) request.getAttribute("lista");
+							ArrayList<Estilo> lista = (ArrayList<Estilo>) request.getAttribute("lista");
 							if (lista == null)
-								lista = new ArrayList<Rol>();
+								lista = new ArrayList<Estilo>();
 
 							for (int i = 1; i <= lista.size(); i++) {
-								Rol pojo = lista.get(i - 1);
+								Estilo pojo = lista.get(i - 1);
 						%>
 						<tr>
 							<td><%=i%></td>

@@ -1,9 +1,9 @@
-<%@page import="com.ipartek.formacion.backoffice.Constantes"%>
-<%@page import="com.ipartek.formacion.backoffice.pojo.Persona"%>
+<%@page import="com.ipartek.formacion.proyecto.Constantes"%>
+<%@page import="com.ipartek.formacion.proyecto.pojo.Grupo"%>
 <%@page import="java.util.Calendar"%>
 
 <%@page
-	import="com.ipartek.formacion.backoffice.listeners.SessionListener"%>
+	import="com.ipartek.formacion.proyecto.listeners.SessionListener"%>
 <%@page
 	import="org.apache.taglibs.standard.tag.common.core.ForEachSupport"%>
 
@@ -114,7 +114,7 @@
 						</thead>
 						<tbody id="lista_user_logged">
 							<%
-								for ( Persona per : SessionListener.listaUsariosLogeados ){
+								for ( Grupo per : SessionListener.listaUsariosLogeados ){
 							%>
 							<tr>
 								<td><a

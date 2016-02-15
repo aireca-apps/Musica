@@ -1,12 +1,12 @@
-<%@ page import="com.ipartek.formacion.backoffice.listeners.DBListener"%>
+<%@ page import="com.ipartek.formacion.proyecto.listeners.DBListener"%>
 <%@ page import="javax.servlet.jsp.tagext.TryCatchFinally"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%@ page import="com.ipartek.formacion.backoffice.Constantes"%>
+<%@ page import="com.ipartek.formacion.proyecto.Constantes"%>
 <%@ page errorPage="pages/error/error.jsp"%>
 
-<%@ page import="com.ipartek.formacion.backoffice.controladores.Mensaje"%>
+<%@ page import="com.ipartek.formacion.proyecto.controladores.Mensaje"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 
 <c:set var="language" value="${cookie.cIdioma.value==''?'eu_ES':cookie.cIdioma.value }" />

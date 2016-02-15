@@ -10,7 +10,7 @@
     <description>Servlet Maestro para que hereden los demas servlet</description>
     <display-name>MasterServlet</display-name>
     <servlet-name>MasterServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.backoffice.controladores.MasterServlet</servlet-class>
+    <servlet-class>com.ipartek.formacion.proyecto.controladores.MasterServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MasterServlet</servlet-name>
@@ -20,7 +20,7 @@
     <description>Controlador para gestionar el login</description>
     <display-name>LoginServlet</display-name>
     <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.backoffice.controladores.LoginServlet</servlet-class>
+    <servlet-class>com.ipartek.formacion.proyecto.controladores.LoginServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
@@ -30,7 +30,7 @@
     <description>Desconexion de sessiones de usuarios</description>
     <display-name>LogoutServlet</display-name>
     <servlet-name>LogoutServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.backoffice.controladores.LogoutServlet</servlet-class>
+    <servlet-class>com.ipartek.formacion.proyecto.controladores.LogoutServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
@@ -40,7 +40,7 @@
     <description>Controlador para gestionar las operaciones sobre usuarios</description>
     <display-name>UsuarioServlet</display-name>
     <servlet-name>UsuarioServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.backoffice.controladores.UsuarioServlet</servlet-class>
+    <servlet-class>com.ipartek.formacion.proyecto.controladores.UsuarioServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UsuarioServlet</servlet-name>
@@ -50,7 +50,7 @@
     <description></description>
     <display-name>SearchServlet</display-name>
     <servlet-name>SearchServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.backoffice.controladores.SearchServlet</servlet-class>
+    <servlet-class>com.ipartek.formacion.proyecto.controladores.SearchServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SearchServlet</servlet-name>
@@ -60,7 +60,7 @@
     <description>Controlador para gestionar las operaciones sobre roles</description>
     <display-name>TablaAuxiliarServlet</display-name>
     <servlet-name>TablaAuxiliarServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.backoffice.controladores.TablaAuxiliarServlet</servlet-class>
+    <servlet-class>com.ipartek.formacion.proyecto.controladores.TablaAuxiliarServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>TablaAuxiliarServlet</servlet-name>
@@ -70,7 +70,7 @@
     <description></description>
     <display-name>LoggedUserServlet</display-name>
     <servlet-name>LoggedUserServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.backoffice.controladores.ajax.LoggedUserServlet</servlet-class>
+    <servlet-class>com.ipartek.formacion.proyecto.controladores.ajax.LoggedUserServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LoggedUserServlet</servlet-name>
@@ -80,28 +80,25 @@
     <description></description>
     <display-name>CheckUserServlet</display-name>
     <servlet-name>CheckUserServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.backoffice.controladores.ajax.CheckUserServlet</servlet-class>
+    <servlet-class>com.ipartek.formacion.proyecto.controladores.ajax.CheckUserServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>CheckUserServlet</servlet-name>
     <url-pattern>/checkuser</url-pattern>
   </servlet-mapping>
   <listener>
-    <listener-class>com.ipartek.formacion.backoffice.listeners.InitListener</listener-class>
+    <listener-class>com.ipartek.formacion.proyecto.listeners.InitListener</listener-class>
   </listener>
   <listener>
-    <listener-class>com.ipartek.formacion.backoffice.listeners.DBListener</listener-class>
-  </listener>
+    <listener-class>com.ipartek.formacion.proyecto.listeners.DBListener</listener-class>
+  </listener>  
   <listener>
-    <listener-class>com.ipartek.formacion.backoffice.listeners.DAOListener</listener-class>
-  </listener>
-  <listener>
-    <listener-class>com.ipartek.formacion.backoffice.listeners.SessionListener</listener-class>
+    <listener-class>com.ipartek.formacion.proyecto.listeners.SessionListener</listener-class>
   </listener>
   <filter>
     <display-name>UserLoggedFilter</display-name>
     <filter-name>UserLoggedFilter</filter-name>
-    <filter-class>com.ipartek.formacion.backoffice.seguridad.UserLoggedFilter</filter-class>
+    <filter-class>com.ipartek.formacion.proyecto.seguridad.UserLoggedFilter</filter-class>
     <init-param>
       <description>paginas a excluir del filtro</description>
       <param-name>excludeLogin</param-name>

@@ -1,6 +1,6 @@
-<%@page import="com.ipartek.formacion.backoffice.Constantes"%>
-<%@page import="com.ipartek.formacion.backoffice.controladores.Mensaje"%>
-<%@ page import="com.ipartek.formacion.backoffice.pojo.Persona"%>
+<%@page import="com.ipartek.formacion.proyecto.Constantes"%>
+<%@page import="com.ipartek.formacion.proyecto.controladores.Mensaje"%>
+<%@ page import="com.ipartek.formacion.proyecto.pojo.Grupo"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 

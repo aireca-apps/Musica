@@ -1,10 +1,10 @@
-<%@page import="com.ipartek.formacion.backoffice.pojo.Rol"%>
+<%@page import="com.ipartek.formacion.proyecto.pojo.Estilo"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.util.GregorianCalendar"%>
-<%@page import="com.ipartek.formacion.backoffice.Constantes"%>
-<%@page import="com.ipartek.formacion.backoffice.pojo.Persona"%>
+<%@page import="com.ipartek.formacion.proyecto.Constantes"%>
+<%@page import="com.ipartek.formacion.proyecto.pojo.Grupo"%>
 <%@page import="java.util.Calendar"%>
 <%@include file="/includes/head.jsp"%>
 <link href="css/datepicker.css" rel="stylesheet">
@@ -17,7 +17,7 @@
 		<div class="col-lg-12">
 			<%
 				//recoger "atributo persona de la request
-					Persona per = (Persona) request.getAttribute("persona");
+					Grupo per = (Grupo) request.getAttribute("persona");
 					boolean isNew = (per.getId() == -1);
 			%>
 			<h1 class="page-header"><%=per.getNombre()%></h1>
@@ -42,7 +42,7 @@
 					<select class="form-control" name="rol" 
 						style="margin: 10px 0;">
 						<%
-							for (Rol rol : (ArrayList<Rol>) request.getAttribute("roles")){
+							for (Estilo rol : (ArrayList<Estilo>) request.getAttribute("roles")){
 						%>
 						<option value="<%=rol.getId()%>"
 							<%try{ if (rol.getNombre().equals(per.getRol().getNombre())) {%>

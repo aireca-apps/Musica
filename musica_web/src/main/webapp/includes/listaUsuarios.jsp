@@ -1,9 +1,9 @@
-<%@page import="com.ipartek.formacion.backoffice.Constantes"%>
+<%@page import="com.ipartek.formacion.proyecto.Constantes"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.ipartek.formacion.backoffice.pojo.Persona"%>
+<%@page import="com.ipartek.formacion.proyecto.pojo.Grupo"%>
 <%@page
-	import="com.ipartek.formacion.backoffice.Constantes"%>
+	import="com.ipartek.formacion.proyecto.Constantes"%>
 <%@page import="java.util.Calendar"%>
 
 <!-- /.panel-heading -->
@@ -25,12 +25,12 @@
 					<tbody>
 						<%
 							//recoger "atributo listado personas de la request
-							ArrayList<Persona> lista = (ArrayList<Persona>) request.getAttribute("listaUsuarios");
+							ArrayList<Grupo> lista = (ArrayList<Grupo>) request.getAttribute("listaUsuarios");
 							if (lista == null)
-								lista = new ArrayList<Persona>();
+								lista = new ArrayList<Grupo>();
 
 							for (int i = 1; i <= lista.size(); i++) {
-								Persona per = lista.get(i - 1);
+								Grupo per = lista.get(i - 1);
 						%>
 						<tr>
 							<td><a

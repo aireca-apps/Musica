@@ -1,6 +1,6 @@
 <!-- /.navbar-top-links -->
 
-<%@page import="com.ipartek.formacion.backoffice.Constantes"%>
+<%@page import="com.ipartek.formacion.proyecto.Constantes"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="language" value="${cookie.cIdioma.value==''?'eu_ES':cookie.cIdioma.value }" />
 <fmt:setLocale value="${language}" />

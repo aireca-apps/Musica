@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@include file="../includes/head.jsp" %>     
+<%@include file="/includes/head.jsp" %>     
 
         <div id="page-wrapper">
             <div class="row">

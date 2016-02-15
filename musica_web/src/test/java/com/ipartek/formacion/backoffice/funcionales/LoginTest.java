@@ -15,23 +15,23 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.ipartek.formacion.backoffice.modelo.PersonaDAO;
-import com.ipartek.formacion.backoffice.modelo.TablaAuxiliarDAO;
-import com.ipartek.formacion.backoffice.pojo.Persona;
-import com.ipartek.formacion.backoffice.pojo.Rol;
+import com.ipartek.formacion.proyecto.modelo.GrupoDAO;
+import com.ipartek.formacion.proyecto.modelo.EstiloDAO;
+import com.ipartek.formacion.proyecto.pojo.Grupo;
+import com.ipartek.formacion.proyecto.pojo.Estilo;
 
 public class LoginTest {
 
-	private static PersonaDAO daoPersona;
-	private static TablaAuxiliarDAO daoRol;
+	private static GrupoDAO daoPersona;
+	private static EstiloDAO daoRol;
 	private static WebDriver driver;
 	private static int idU = -1;
 	private static int idR = -1;
 	// private static long aux;
 	private static String data;
 
-	private static Persona per;
-	private static Rol rol;
+	private static Grupo per;
+	private static Estilo rol;
 
 	@Ignore
 	public static void setUpBeforeClass() throws Exception {
@@ -39,11 +39,11 @@ public class LoginTest {
 		driver = new HtmlUnitDriver();
 		// driver = new ChromeDriver();
 
-		daoRol = new TablaAuxiliarDAO();
-		daoPersona = new PersonaDAO();
+		daoRol = new EstiloDAO();
+		daoPersona = new GrupoDAO();
 		data = Long.toString(System.currentTimeMillis()).substring(0, 9);
 
-		rol = new Rol(data);
+		rol = new Estilo(data);
 		rol.setCodigo(data.substring(0, 2));
 		rol.setDescripcion(data);
 
@@ -55,7 +55,7 @@ public class LoginTest {
 			fail("No deberia haber fallado");
 		}
 
-		per = new Persona();
+		per = new Grupo();
 		per.setDni(data);
 		per.setEmail(data + "@" + data + ".com");
 		per.setFechaNacimiento(new Date(System.currentTimeMillis()));

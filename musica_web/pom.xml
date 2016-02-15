@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.ipartek.proyecto.musica</groupId>
+		<groupId>com.ipartek.proyecto</groupId>
 		<artifactId>musica</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
@@ -12,18 +12,10 @@
 	<description>Aplicación web con servlets 2.5 para gestionar la base de datos musical</description>
 
 	<dependencies>
-
-		<!-- TODO quitar cuando implementemos el servicio
-		Dependencia al back_model -->
-		<dependency>
-			<groupId>com.ipartek.proyecto.musica</groupId>
-			<artifactId>musica_model</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 		
 		<!-- Dependencia al back_service -->
 		<dependency>
-			<groupId>com.ipartek.proyecto.musica</groupId>
+			<groupId>com.ipartek.proyecto</groupId>
 			<artifactId>musica_service</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

@@ -1,5 +1,5 @@
 
-<%@page import="com.ipartek.formacion.backoffice.controladores.Mensaje"%>
+<%@page import="com.ipartek.formacion.proyecto.controladores.Mensaje"%>
 <%
 	Mensaje msg = (Mensaje) request.getAttribute("msj");
 	if (msg != null) {
