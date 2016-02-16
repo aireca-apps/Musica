@@ -6,7 +6,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ipartek.formacion.proyecto.modelo.ia.InterfacePersistable;
+import com.ipartek.formacion.proyecto.modelo.ia.AbstractPersistible;
 import com.ipartek.formacion.proyecto.pojo.Estilo;
+import com.ipartek.formacion.proyecto.pojo.Grupo;
 
 /**
  * DAO para operaciones de CRUD con Tablas Axuliares, que deben tener esta
@@ -22,114 +25,108 @@ import com.ipartek.formacion.proyecto.pojo.Estilo;
  * @author ur00
  *
  */
-
-public class EstiloDAO implements Persistable<Estilo> {
+public class EstiloDAO extends AbstractPersistible<Estilo> {
 
 	@Override
 	public List<Estilo> getAll() throws SQLException {
 		ArrayList<Estilo> lista = new ArrayList<Estilo>();
 		DbConnection conn = new DbConnection();
-		String sql = "select id, nombre, descripcion, codigo from `rol` order by `id` desc limit 500;";
-		PreparedStatement ps = conn.getConnection().prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
+		String sql = "select id, nombre, descripcion, codigo from `estilo` order by `id` desc limit 500;";
+		PreparedStatement consulta = conn.getConnection().prepareStatement(sql);
+		ResultSet rs = consulta.executeQuery();
 		while (rs.next()) {
 			lista.add(mapeo(rs));
 		}
-		rs.close();
-		ps.close();
-		conn.desconectar();
+		cerrarConsulta(rs, conn, consulta);
 		return lista;
 	}
 
 	@Override
 	public Estilo getById(int id) throws SQLException {
-		Estilo p = null;
+		Estilo est = new Estilo();
 		DbConnection conn = new DbConnection();
-		String sql = "select id, nombre, descripcion, codigo from `rol` where id = ? ;";
-		PreparedStatement pst = conn.getConnection().prepareStatement(sql);
-		pst.setInt(1, id);
-		ResultSet rs = pst.executeQuery();
-		while (rs.next()) {
-			p = mapeo(rs);
+		String sql = "select id, nombre, descripcion, codigo from `estilo` where id = ? ;";
+		PreparedStatement consulta = conn.getConnection().prepareStatement(sql);
+		consulta.setInt(1, id);
+		ResultSet rs = consulta.executeQuery();
+		if (rs.next()) {
+			est = mapeo(rs);
 		}
-		rs.close();
-		pst.close();
-		conn.desconectar();
-		return p;
+		cerrarConsulta(rs, conn, consulta);
+		return est;
 	}
 
 	@Override
 	public boolean delete(int id) throws SQLException {
 		boolean resul = false;
 		DbConnection conn = new DbConnection();
-		String sql = "DELETE FROM `rol` WHERE  `id`= ? ;";
-		PreparedStatement pst = conn.getConnection().prepareStatement(sql);
-		pst.setInt(1, id);
-		if (pst.executeUpdate() == 1) {
+		String sql = "DELETE FROM `estilo` WHERE  `id`= ? ;";
+		PreparedStatement consulta = conn.getConnection().prepareStatement(sql);
+		consulta.setInt(1, id);
+		if (consulta.executeUpdate() == 1) {
 			resul = true;
 		}
-		pst.close();
-		conn.desconectar();
+		cerrarPeticion(conn, consulta);
 		return resul;
 	}
 
 	@Override
-	public boolean update(Estilo p) throws SQLException {
+	public boolean update(Estilo est) throws SQLException {
 		boolean resul = false;
-		if (p != null) {
+		if (est != null && !est.equals(new Estilo())) {
 			DbConnection conn = new DbConnection();
-			String sql = "UPDATE `rol` SET `nombre`= ? , `descripcion`= ?, `codigo`= ? WHERE  `id`= ? ;";
-			PreparedStatement pst = conn.getConnection().prepareStatement(sql);
-			pst.setString(1, p.getNombre());
-			pst.setString(2, p.getDescripcion());
-			pst.setString(3, p.getCodigo());
-			pst.setInt(4, p.getId());
-			if (pst.executeUpdate() == 1) {
+			String sql = "UPDATE `estilo` SET `nombre`= ? , `descripcion`= ?, `codigo`= ? WHERE  `id`= ? ;";
+			PreparedStatement consulta = conn.getConnection().prepareStatement(sql);
+			consulta.setString(1, est.getNombre());
+			consulta.setString(2, est.getDescripcion());
+			consulta.setString(3, est.getCodigo());
+			consulta.setInt(4, est.getId());
+			if (consulta.executeUpdate() == 1) {
 				resul = true;
 			}
-			pst.close();
-			conn.desconectar();
+			cerrarPeticion(conn, consulta);
 		}
 		return resul;
 	}
 
 	@Override
-	public int insert(Estilo p) throws SQLException {
+	public int insert(Estilo est) throws SQLException {
 		int resul = -1;
-		DbConnection conn = new DbConnection();
-		String sql = "INSERT INTO `rol` (`nombre`,`descripcion`, `codigo` ) VALUES ( ?, ?, ? );";
-		PreparedStatement pst = conn.getConnection().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-		pst.setString(1, p.getNombre());
-		pst.setString(2, p.getDescripcion());
-		pst.setString(3, p.getCodigo());
-		if (pst.executeUpdate() == 1) {
-			ResultSet generatedKeys = pst.getGeneratedKeys();
-			if (generatedKeys.next()) {
-				p.setId(generatedKeys.getInt(1));
-				resul = p.getId();
-			} else {
-				throw new SQLException("Creating user failed, no ID obtained.");
+		if (est != null && !est.equals(new Estilo())) {
+			DbConnection conn = new DbConnection();
+			String sql = "INSERT INTO `estilo` (`nombre`,`descripcion`, `codigo` ) VALUES ( ?, ?, ? );";
+			PreparedStatement consulta = conn.getConnection().prepareStatement(sql,
+					PreparedStatement.RETURN_GENERATED_KEYS);
+			consulta.setString(1, est.getNombre());
+			consulta.setString(2, est.getDescripcion());
+			consulta.setString(3, est.getCodigo());
+			if (consulta.executeUpdate() == 1) {
+				ResultSet generatedKeys = consulta.getGeneratedKeys();
+				if (generatedKeys.next()) {
+					resul = generatedKeys.getInt(1);
+					est.setId(resul);
+				}
 			}
+			cerrarPeticion(conn, consulta);
 		}
-		pst.close();
-		conn.desconectar();
 		return resul;
 	}
 
 	/**
 	 * Mapear ResulSet a un Pojo
 	 *
-	 * @param rs
+	 * @param res
 	 * @return
 	 * @throws SQLException
 	 */
-	private Estilo mapeo(ResultSet rs) throws SQLException {
-		Estilo p = new Estilo("");
-		p.setId(rs.getInt("id"));
-		p.setNombre(rs.getString("nombre"));
-		p.setDescripcion(rs.getString("descripcion"));
-		p.setCodigo(rs.getString("codigo"));
-		return p;
+	@Override
+	public Estilo mapeo(ResultSet res) throws SQLException {
+		Estilo gru = new Estilo();
+		gru.setId(res.getInt("id"));
+		gru.setNombre(res.getString("nombre"));
+		gru.setDescripcion(res.getString("descripcion"));
+		gru.setCodigo(res.getString("codigo"));
+		return gru;
 	}
 
 }

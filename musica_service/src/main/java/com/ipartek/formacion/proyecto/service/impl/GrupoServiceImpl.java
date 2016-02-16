@@ -88,7 +88,7 @@ public class GrupoServiceImpl implements GrupoService {
 	public List<Grupo> buscar(String criterio) {
 		List<Grupo> listado;
 		try {
-			listado = daoGrupo.getPersonas(criterio);
+			listado = daoGrupo.searchGrupos(criterio);
 		} catch (SQLException e) {
 			// TODO log
 			e.printStackTrace();

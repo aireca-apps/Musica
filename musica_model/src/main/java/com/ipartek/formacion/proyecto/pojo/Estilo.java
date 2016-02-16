@@ -64,9 +64,33 @@ public class Estilo {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+	
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		boolean resul = false;
+		if (obj != null) {
+			resul = this.hashCode() == obj.hashCode();
+		}
+		return resul;
+	}
 
 	@Override
 	public String toString() {
-		return "Rol [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + "]";
+		return "Estilo [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", codigo=" + codigo + "]";
 	}
+
+	
 }

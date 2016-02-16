@@ -15,15 +15,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.ipartek.formacion.proyecto.modelo.GrupoDAO;
-import com.ipartek.formacion.proyecto.modelo.EstiloDAO;
 import com.ipartek.formacion.proyecto.pojo.Grupo;
 import com.ipartek.formacion.proyecto.pojo.Estilo;
 
 public class LoginTest {
 
-	private static GrupoDAO daoPersona;
-	private static EstiloDAO daoRol;
 	private static WebDriver driver;
 	private static int idU = -1;
 	private static int idR = -1;
@@ -33,14 +29,12 @@ public class LoginTest {
 	private static Grupo per;
 	private static Estilo rol;
 
-	@Ignore
+	/*@Ignore
 	public static void setUpBeforeClass() throws Exception {
 		// driver = new FirefoxDriver();
 		driver = new HtmlUnitDriver();
 		// driver = new ChromeDriver();
 
-		daoRol = new EstiloDAO();
-		daoPersona = new GrupoDAO();
 		data = Long.toString(System.currentTimeMillis()).substring(0, 9);
 
 		rol = new Estilo(data);
@@ -137,6 +131,6 @@ public class LoginTest {
 		// login.jsp
 		assertNotEquals(null, contra);
 		assertNotEquals(null, usuario);
-	}
+	}*/
 
 }

@@ -3,8 +3,6 @@ package com.ipartek.formacion.proyecto.controladores;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,21 +19,13 @@ public class EstiloServlet extends MasterServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static final String VIEW_LIST = "/pages/estilo/estiloList.jsp",
-			VIEW_FORM = "/pages/estilo/estiloDetalle.jsp";
+								VIEW_FORM = "/pages/estilo/estiloDetalle.jsp";
 	private static int operacion;
 
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		operacion = Constantes.OP_LISTAR;
 		super.service(request, response);
-	}
-
-	/**
-	 * @see Servlet#init(ServletConfig)
-	 */
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
 	}
 
 	/**
@@ -92,11 +82,7 @@ public class EstiloServlet extends MasterServlet {
 				pCodigo = request.getParameter("codigo");
 
 		// construir estilo
-		Estilo estilo = new Estilo(pNombre);
-		estilo.setId(id);
-		estilo.setDescripcion(pDescripcion);
-		estilo.setCodigo(pCodigo);
-
+		Estilo estilo = new Estilo(id, pNombre, pDescripcion, pCodigo);
 		// persistir en la bbdd
 		if (estilo.getId() == -1)
 			if (serviceEstilo.insertar(estilo))

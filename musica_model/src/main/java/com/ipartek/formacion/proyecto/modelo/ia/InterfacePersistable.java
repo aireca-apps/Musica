@@ -1,7 +1,10 @@
-package com.ipartek.formacion.proyecto.modelo;
+package com.ipartek.formacion.proyecto.modelo.ia;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
+import com.ipartek.formacion.proyecto.pojo.Grupo;
 
 /**
  * Interfaz para dar la habilidad de que sean Persistables los DAOs.<br>
@@ -15,7 +18,7 @@ import java.util.List;
  * @author ur00
  *
  */
-public interface Persistable<P> {
+public interface InterfacePersistable<P> {
 
 	/**
 	 * Listado de todos los objetos de la consulta ordenado por id descente,
@@ -64,4 +67,6 @@ public interface Persistable<P> {
 	 * @throws SQLException 
 	 */
 	int insert(P persistable) throws SQLException;
+	
+	P mapeo(ResultSet res)  throws SQLException;
 }

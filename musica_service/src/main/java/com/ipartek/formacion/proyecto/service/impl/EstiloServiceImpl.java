@@ -98,5 +98,4 @@ public class EstiloServiceImpl implements EstiloService {
 		}
 		return est;
 	}
-
 }

@@ -120,7 +120,7 @@
 								<td><a
 									href="<%=Constantes.CONTROLLER_GRUPOS%>?op=<%=Constantes.OP_DETALLE%>&id=<%=per.getId()%>"
 									title="Ir al detalle de <%=per.getNombre()%>"><%=per.getNombre()%></a></td>
-								<td><%=per.getEmail()%></td>
+								<td><%=per.getEstilo()%></td>
 								<td><a
 									href="<%=Constantes.CONTROLLER_ESTILOS%>?op=<%=Constantes.OP_DETALLE%>&id=<%=per.getEstilo().getId()%>"
 									title="Ir al detalle de <%=per.getEstilo().getNombre()%>"

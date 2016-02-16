@@ -35,15 +35,13 @@ public class CheckUserServlet extends MasterServlet {
 			String busqueda = request.getParameter("p2");
 
 			boolean existe = false;
-
+			/*TODO login
 			for (Grupo grupo : servicioGrupo.buscar(busqueda)) {
 				if (("nombre".equals(criterio) && grupo.getNombre().equals(busqueda))
-						|| ("dni".equals(criterio) && grupo.getDni().equals(busqueda))
-						|| ("email".equals(criterio) && grupo.getEmail().equals(busqueda))) {
+						|| ("estilo".equals(criterio) && grupo.getEstilo().equals(busqueda))) {
 					existe = true;
 				}
-			}
-
+			}*/
 			out.print(existe);
 			out.flush();
 		} catch (Exception e) {

@@ -25,7 +25,6 @@ import com.ipartek.formacion.proyecto.service.impl.GrupoServiceImpl;
 public class MasterServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	// DAOs
 	protected static GrupoService servicioGrupo;
 	protected static EstiloService serviceEstilo;
 	protected static RequestDispatcher dispatch; // El que se encarga de

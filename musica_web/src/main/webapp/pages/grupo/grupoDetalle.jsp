@@ -9,15 +9,12 @@
 <%@include file="/includes/head.jsp"%>
 <link href="css/datepicker.css" rel="stylesheet">
 
-
-
-
 <div id="page-wrapper">
 	<div class="row">
 		<div class="col-lg-12">
 			<%
 				//recoger "atributo persona de la request
-					Grupo per = (Grupo) request.getAttribute("persona");
+					Grupo per = (Grupo) request.getAttribute("grupo");
 					boolean isNew = (per.getId() == -1);
 			%>
 			<h1 class="page-header"><%=per.getNombre()%></h1>
@@ -65,65 +62,58 @@
 					<span id="nombre-error" style="color: tomato; display: none;"><i class="fa fa-times"></i> El Nombre introducido ya existe.</span>
 				</div>
 			</div>
-
+			
 			<div class="form-group">
-				<label for="dni" class="col-sm-2 control-label"
-					style="margin: 10px 0;">DNI</label>
+				<label for="componentes" class="col-sm-2 control-label"
+					>Componentes</label>
 				<div class="col-sm-10">
-					<input class="form-control" type="text" id="dni" name="dni" placeholder="Escribe tu DNI"
-						value="<%=per.getDni()%>" required style="margin: 10px 0;">
-					<span id="dni-error" style="color: tomato; display: none;"><i class="fa fa-times"></i> El DNI introducido ya existe.</span>
+					<textarea class="form-control" id="componentes" rows="3" name="componentes"
+						placeholder="Componentes" style="margin: 10px 0;"><%=per.getComponentes()%></textarea>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="pass" class="col-sm-2 control-label"
-					style="margin: 10px 0;">Pass</label>
-				<div class="col-sm-10">
-					<input class="form-control" type="password" id="pass" name="pass" placeholder="Escribe tu clave"
-						value="<%=per.getPass()%>" required style="margin: 10px 0;">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label for="observaciones" class="col-sm-2 control-label"
-					>Puesto de trabajo</label>
-				<div class="col-sm-10">
-					<textarea class="form-control" id="observaciones" rows="3" name="observaciones"
-						placeholder="Escribe algo sobre ti" style="margin: 10px 0;"><%=per.getObservaciones()%></textarea>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label for="email" class="col-sm-2 control-label"
-					style="margin: 10px 0;">Email</label>
-				<div class="col-sm-10">
-					<input class="form-control" type="email" id="email" name="email" placeholder="Escribe tu correo"
-						value="<%=per.getEmail()%>" required style="margin: 10px 0;">
-					<span id="email-error" style="color: tomato; display: none;"><i class="fa fa-times"></i> El Email introducido ya existe.</span>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label for="fecha" class="col-sm-2 control-label"
-					style="margin: 10px 0;">Fecha de nacimiento</label>
+				<label for="fechaInicio" class="col-sm-2 control-label"
+					style="margin: 10px 0;">Fecha de Inicio</label>
 				<div class="col-sm-10">
 					<%
 						GregorianCalendar calendar = new GregorianCalendar(1900, 0, 1);
-						Date fechaNacimiento = new Date(calendar.getTimeInMillis());
-						if (per.getFechaNacimiento().equals(fechaNacimiento)) {
+						Date fechaInicio = new Date(calendar.getTimeInMillis());
+						if (per.getFechaInicio().equals(fechaInicio)) {
 					%>
-					<input class="form-control col-xl-6" type="text" id="fecha" name="fecha" placeholder="Ejem.: 1982-08-10"
+					<input class="form-control col-xl-6" type="text" id="fechaInicio" name="fechaInicio" placeholder="Ejem.: 1982-08-10"
 						required
 						pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])"
 						style="margin: 10px 0;">
 					<% 
 					} else {
 					%>
-					<input type="text" name="fecha" id="fecha" 
+					<input type="text" name="fechaInicio" id="fechaInicio" 
 						class="form-control"
-						value="<%=per.getFechaNacimiento()%>" required
+						value="<%=per.getFechaInicio()%>" required
 						pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])"
+						style="margin: 10px 0;">
+					<%
+						}
+					%>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="fechaFin" class="col-sm-2 control-label"
+					style="margin: 10px 0;">Fecha de Separación</label>
+				<div class="col-sm-10">
+					<%
+					if(per.getFechaFin() == null || per.getFechaFin().equals(fechaInicio)){
+					%>
+					<input class="form-control col-xl-6" type="text" id="fechaFin" name="fechaFin" placeholder="Ejem.: 1982-08-10"
+						style="margin: 10px 0;">
+					<% 
+					} else {
+					%>
+					<input type="text" name="fechaFin" id="fechaFin" 
+						class="form-control"
+						value="<%=per.getFechaFin()%>" required
 						style="margin: 10px 0;">
 					<%
 						}
@@ -132,12 +122,6 @@
 			</div>
 						
 			<input type="hidden" name="id" value="<%=per.getId()%>">
-			<input type="hidden" name="nombre-hid" id="nombre-hid" value="<%=per.getNombre()%>">
-			<input type="hidden" name="dni-hid" id="dni-hid" value="<%=per.getDni()%>">
-			<input type="hidden" name="pass-hid" value="<%=per.getPass()%>">
-			<input type="hidden" name="email-hid" id="email-hid" value="<%=per.getEmail()%>">
-			<input type="hidden" name="observaciones-hid" value="<%=per.getObservaciones()%>">
-			<input type="hidden" name="fecha-hid" value="<%=per.getFechaNacimiento()%>">
 			<input type="hidden" name="op" value="<%=Constantes.OP_MODIFICAR%>">
 
 			<div class="form-group">
@@ -197,46 +181,36 @@
 <script src="js/bootstrap/bootstrap-datepicker.js"></script>
 <script>
 $(document).ready(function() {	
-	var checkout = $('#fecha').datepicker({
+	var checkout = $('#fechaInicio').datepicker({
         format: 'yyyy-mm-dd'
     }).on('changeDate', function(ev) {
 		checkFields();
     });
-    
+	
+	var checkout2 = $('#fechaFin').datepicker({
+        format: 'yyyy-mm-dd'
+    }).on('changeDate', function(ev) {
+		checkFields();
+    });
+	   
 	checkFields();
 	
 	$('#nombre').focusout(function() {
 		if ( $(this).val().trim() != "" )
 			checkUserData( 'nombre', $(this).val() );
 	});
-            
-	$('#dni').focusout(function() {
-		if ( $(this).val().trim() != "" )
-			checkUserData( 'dni', $(this).val() );
-	});
-
-	$('#email').focusout(function() {
-		if ( $(this).val().trim() != "" )
-			checkUserData( 'email', $(this).val() );
-	});
-
+          
 	$('input').keyup(function() {
 		checkFields();
 	});
 	
 	function checkFields() {
 		if( $('#nombre').val().trim() == "" ) console.log("Peta en nombre");
-		if( $('#pass').val().trim() == "" ) console.log("Peta en pass");
-		if( $('#fecha').val().trim() == "" ) console.log("Peta en fecha");
-		if( $('#email').val().trim() == "" ) console.log("Peta en email");
-		if( $('#dni').val().trim() == "" ) console.log("Peta en dni");
+		if( $('#fechaInicio').val().trim() == "" ) console.log("Peta en fecha");
 		
 		if (
 			$('#nombre').val().trim() == "" ||
-			$('#dni').val().trim() == "" ||
-			$('#pass').val().trim() == "" ||
-			$('#fecha').val().trim() == "" ||
-			$('#email').val().trim() == ""
+			$('#fechaInicio').val().trim() == "" 
 		) {
 			$('#enviar').prop('disabled', true);
 		} else {

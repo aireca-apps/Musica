@@ -13,12 +13,10 @@
 				<i class="fa fa-user fa-fw"></i> Últimos 500 grupos inscritos.
 				<div class="pull-right">
 					<div class="btn-group">
-						<button type="button" class="btn btn-default btn-xs">
-							<a href="<%=Constantes.CONTROLLER_GRUPOS%>?op=<%=Constantes.OP_NUEVO%>"
+						<a href="<%=Constantes.CONTROLLER_GRUPOS%>?op=<%=Constantes.OP_NUEVO%>"
 								title="Crear registro"> <i class="fa fa-plus fa-fw"></i>
 								Añadir Grupo
 							</a>
-						</button>
 					</div>
 				</div>
 			</div>

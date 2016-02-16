@@ -19,12 +19,10 @@
 				<i class="fa fa-user fa-fw"></i> Listado de Estilos
 				<div class="pull-right">
 					<div class="btn-group">
-						<button type="button" class="btn btn-default btn-xs">
 							<a href="musica/estilos?op=<%=Constantes.OP_NUEVO%>"
 								title="Crear registro"> <i class="fa fa-plus fa-fw"></i>
 								Crear nuevo Registro
 							</a>
-						</button>
 					</div>
 				</div>
 			</div>

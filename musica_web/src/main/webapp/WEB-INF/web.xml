@@ -95,6 +95,7 @@
   <listener>
     <listener-class>com.ipartek.formacion.proyecto.listeners.SessionListener</listener-class>
   </listener>
+  
   <filter>
     <display-name>UserLoggedFilter</display-name>
     <filter-name>UserLoggedFilter</filter-name>
@@ -112,7 +113,8 @@
   <filter-mapping>
     <filter-name>UserLoggedFilter</filter-name>
     <url-pattern>*.jsp</url-pattern>
-  </filter-mapping>
+  </filter-mapping>  
+  
   <error-page>
     <error-code>404</error-code>
     <location>/pages/error/error-404.jsp</location>

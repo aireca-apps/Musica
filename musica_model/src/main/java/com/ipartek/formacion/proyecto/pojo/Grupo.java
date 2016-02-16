@@ -28,6 +28,16 @@ public class Grupo {
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 	}
+	
+	public Grupo(String nombre, String componentes, Date fechaInicio, Date fechaFin, Estilo estilo) {
+		this(nombre, componentes, fechaInicio, fechaFin);
+		this.estilo = estilo;
+	}
+	
+	public Grupo(int id, String nombre, String componentes, Date fechaInicio, Date fechaFin, Estilo estilo) {
+		this(nombre, componentes, fechaInicio, fechaFin, estilo);
+		this.id = id;
+	}
 
 	public int getId() {
 		return id;
@@ -98,4 +108,10 @@ public class Grupo {
 		}
 		return resul;
 	}
+
+	@Override
+	public String toString() {
+		return "Grupo [id=" + id + ", nombre=" + nombre + ", componentes=" + componentes + ", fechaInicio="
+				+ fechaInicio + ", fechaFin=" + fechaFin + ", estilo=" + estilo.toString() + "]";
+	}	
 }

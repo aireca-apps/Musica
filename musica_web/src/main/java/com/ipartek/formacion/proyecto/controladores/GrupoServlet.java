@@ -60,11 +60,7 @@ public class GrupoServlet extends MasterServlet {
 				break;
 			}
 			request.setAttribute("msj", msj);
-			/*
-			 * forward para servir la jsp (lanzarlo). en forward hay que poner
-			 * dos argumentos. doGet tiene dos request y response, al ser una
-			 * petición interna, hay que poner los mismos
-			 */
+
 			dispatch.forward(request, response);
 		} catch (Exception e) {
 			// TODO mejor en un LOG
@@ -86,31 +82,30 @@ public class GrupoServlet extends MasterServlet {
 		// recoger parámetros formulario
 		int id = Integer.parseInt(request.getParameter("id")),
 				estiloId = Integer.parseInt(request.getParameter("estilo"));
-		String pNombre = request.getParameter("nombre"), pDni = request.getParameter("dni"),
-				pPass = request.getParameter("pass"), pEmail = request.getParameter("email"),
-				pObservaciones = request.getParameter("observaciones"), pFecha = request.getParameter("fecha");
+		String pNombre = request.getParameter("nombre"), pComponentes = request.getParameter("componentes"),
+				pFechaInicio = request.getParameter("fechaInicio"), pFechaFin = request.getParameter("fechaFin");
 
 		Estilo estilo = serviceEstilo.detalle(estiloId);
 		if (estilo.getId() != -1) {
-			// construir persona
-			Grupo per = new Grupo();
-			per.setId(id);
-			per.setNombre(pNombre);
-			per.setDni(pDni);
-			per.setPass(pPass);
-			per.setEmail(pEmail);
-			per.setObservaciones(pObservaciones);
-			per.setEstilo(estilo);
+			// construir grupo
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			java.util.Date parsed = format.parse(pFecha);
-			per.setFechaNacimiento(new java.sql.Date(parsed.getTime()));
+			java.util.Date parsed = format.parse(pFechaInicio);
+			Grupo gru;
+			if (pFechaFin != "") {
+				java.util.Date parsed2 = format.parse(pFechaFin);
+				gru = new Grupo(id, pNombre, pComponentes, new java.sql.Date(parsed.getTime()),
+						new java.sql.Date(parsed2.getTime()), serviceEstilo.detalle(estiloId));
+			} else {
+				gru = new Grupo(id, pNombre, pComponentes, new java.sql.Date(parsed.getTime()), null,
+						serviceEstilo.detalle(estiloId));
+			}
 			// persistir en la bbdd
-			if (per.getId() == -1)
-				if (servicioGrupo.insertar(per))
+			if (gru.getId() == -1) {
+				if (servicioGrupo.insertar(gru))
 					msj = new Mensaje("Grupo insertado con éxito", Mensaje.TIPO_SUCCESS);
 				else
 					msj = new Mensaje("No se ha insertado el grupo", Mensaje.TIPO_WARNING);
-			else if (servicioGrupo.modificar(per)) {
+			} else if (servicioGrupo.modificar(gru)) {
 				msj = new Mensaje("Registro modificado con éxito", Mensaje.TIPO_SUCCESS);
 			} else {
 				msj = new Mensaje("No se ha modificado el registro", Mensaje.TIPO_WARNING);
@@ -148,26 +143,20 @@ public class GrupoServlet extends MasterServlet {
 	 * @throws SQLException
 	 */
 	private void nuevo(HttpServletRequest request) throws SQLException {
-		Grupo p = new Grupo();
-		request.setAttribute("persona", p);
+		request.setAttribute("grupo", new Grupo());
 		ArrayList<Estilo> estilos = (ArrayList<Estilo>) serviceEstilo.listar();
 		request.setAttribute("estilos", estilos);
 		dispatch = request.getRequestDispatcher(Constantes.VIEW_GRUPO_FORM);
 	}
 
 	private void listar(HttpServletRequest request) throws SQLException {
-
-		// Guardar listado (se obtiene del servicio) como atributo en request
 		request.setAttribute("listaGrupos", servicioGrupo.listar());
-
-		// Petición interna a la jsp (RequestDistapecher es para decirle a donde
-		// tiene que ir, se carga el dispatcher)
 		dispatch = request.getRequestDispatcher(Constantes.VIEW_GRUPO_LIST);
 	}
 
 	private void detalle(HttpServletRequest request) throws NumberFormatException, SQLException {
 		pId = request.getParameter("id");
-		request.setAttribute("persona", servicioGrupo.detalle(Integer.parseInt(pId)));
+		request.setAttribute("grupo", servicioGrupo.detalle(Integer.parseInt(pId)));
 		ArrayList<Estilo> estilos = (ArrayList<Estilo>) serviceEstilo.listar();
 		request.setAttribute("estilos", estilos);
 		dispatch = request.getRequestDispatcher(Constantes.VIEW_GRUPO_FORM);

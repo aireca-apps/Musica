@@ -16,9 +16,9 @@
 					<thead>
 						<tr>
 							<th>Nombre</th>
-							<th>DNI</th>
-							<th>Email</th>							
-							<th>Fecha de Nac.</th>
+							<th>Componentes</th>
+							<th>Fecha de Inicio</th>							
+							<th>Fecha de Separación</th>
 							<th>Estilo</th>
 						</tr>
 					</thead>
@@ -36,13 +36,22 @@
 							<td><a
 								href="<%=Constantes.CONTROLLER_GRUPOS%>?op=<%=Constantes.OP_DETALLE%>&id=<%=per.getId()%>"
 								title="Ir al detalle de <%=per.getNombre()%>"><%=per.getNombre()%></a></td>
-							<td><%=per.getDni()%></td>
-							<td><%=per.getEmail()%></td>
-							<td><%=per.getFechaNacimiento()%></td>
+							<td><%=per.getComponentes()%></td>
+							<td><%=per.getFechaInicio()%></td>
 							<%
 								Calendar cal = Calendar.getInstance();
-									cal.setTime(per.getFechaNacimiento());
+									cal.setTime(per.getFechaInicio());
+								if (per.getFechaFin() != null){	
 							%>
+							<td><%=per.getFechaFin()%></td>
+							<%
+								Calendar cal2 = Calendar.getInstance();
+									cal2.setTime(per.getFechaFin());
+								}
+								else{
+							%>
+							<td>Siguen en activo</td>
+							<%}%>
 							<td><a href="<%=Constantes.CONTROLLER_ESTILOS%>?op=<%=Constantes.OP_DETALLE%>&id=<%=per.getEstilo().getId()%>"
 								title="Ir al detalle de <%=per.getEstilo().getNombre()%>" style="margin: 10px 0;"><%=per.getEstilo().getNombre()%></td>
 						</tr>

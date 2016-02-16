@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,24 +20,6 @@ import com.ipartek.formacion.proyecto.pojo.Grupo;
 public class SearchServlet extends MasterServlet {
 	private static final long serialVersionUID = 1L;
 	private final static Logger LOG = Logger.getLogger(SearchServlet.class);
-
-	/**
-	 * @see Servlet#init(ServletConfig)
-	 */
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-	}
-
-	/**
-	 * Ahora se llamaría a este método y de este método llamaría a doGet o
-	 * doPost mediante thread
-	 */
-	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		super.service(request, response);
-	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -83,5 +63,4 @@ public class SearchServlet extends MasterServlet {
 		request.setAttribute("criterio", criterio);
 		request.getRequestDispatcher(Constantes.VIEW_GRUPO_SEARCH).forward(request, response);
 	}
-
 }
