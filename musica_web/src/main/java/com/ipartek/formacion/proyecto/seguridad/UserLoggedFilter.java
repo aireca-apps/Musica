@@ -67,7 +67,7 @@ public class UserLoggedFilter implements Filter {
 		if (!urlSolicitada.contains(this.loginView)) {
 
 			// Comprobar si usuario loggeado
-			Grupo userLogged = (Grupo) session.getAttribute("userlogged");
+			String userLogged = (String) session.getAttribute("userlogged");
 			if (userLogged == null) {
 
 				// guardar informacion de la peticion

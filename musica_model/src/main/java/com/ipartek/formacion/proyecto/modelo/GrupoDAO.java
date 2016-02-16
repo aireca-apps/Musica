@@ -14,8 +14,8 @@ import com.ipartek.formacion.proyecto.pojo.Grupo;
 
 public class GrupoDAO extends AbstractPersistible<Grupo> {
 
-	public Grupo login(String email, String pass) throws SQLException {
-		Grupo resultado = null;
+	public String login(String email, String pass) throws SQLException {
+		String resultado = null;
 		DbConnection conn = new DbConnection();
 
 		// para llamar a un procedimiento creado en heidi
@@ -25,7 +25,7 @@ public class GrupoDAO extends AbstractPersistible<Grupo> {
 		consulta.setString(2, pass);
 		ResultSet rs = consulta.executeQuery();
 		while (rs.next()) {
-			resultado = mapeo(rs);
+			resultado = rs.getString("nick");
 		}
 		cerrarConsulta(rs, conn, consulta);
 		return resultado;

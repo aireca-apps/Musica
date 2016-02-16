@@ -93,9 +93,9 @@ public class LoginServlet extends HttpServlet {
 				String pPass = request.getParameter("password");
 				String pIdioma = request.getParameter("idioma");
 				boolean recordar = (request.getParameter("recuerdame") == null ? false : true);
-				Grupo gru = servicioGrupo.accede(pEmail, pPass);
+				String gru = servicioGrupo.accede(pEmail, pPass);
 
-				if (gru.getId() == -1) {
+				if (gru.equals("")) {
 					msj = new Mensaje("Credenciales no válidas", Mensaje.TIPO_DANGER);
 					dispatch = request.getRequestDispatcher(Constantes.VIEW_LOGIN);
 				} else {
@@ -119,7 +119,7 @@ public class LoginServlet extends HttpServlet {
 					session.setAttribute(Constantes.SESSION_USER_LOGGED, gru);
 					session.setAttribute(Constantes.SESSION_USER_LANGUAGE, pIdioma);
 
-					LOG.info(" logged: " + gru.toString());
+					LOG.info(" logged: " + gru);
 					dispatch = request.getRequestDispatcher(Constantes.VIEW_INDEX);
 				}
 

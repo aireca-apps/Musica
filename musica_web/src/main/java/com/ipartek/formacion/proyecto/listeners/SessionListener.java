@@ -19,7 +19,7 @@ HttpSessionAttributeListener {
 
 	private int sessionCount = 0;
 	private int userLoggedCount = 0;
-	public static ArrayList<Grupo> listaUsariosLogeados = new ArrayList<Grupo>();
+	public static ArrayList<String> listaUsariosLogeados = new ArrayList<String>();
 	private ServletContext sc;
 
 	@Override
@@ -52,10 +52,10 @@ HttpSessionAttributeListener {
 
 		LOG.info("session attributeAdded " + se.getName());
 
-		if ("userlogged".equals(se.getName())) {
+		if ("userlogged".equals(se)) {
 			synchronized (this) {
 				userLoggedCount++;
-				listaUsariosLogeados.add((Grupo) se.getValue());
+				listaUsariosLogeados.add((String) se.getValue());
 			}
 		}
 
@@ -64,11 +64,11 @@ HttpSessionAttributeListener {
 	@Override
 	public void attributeRemoved(HttpSessionBindingEvent se) {
 
-		LOG.info("session attributeRemoved " + se.getName());
-		if ("userlogged".equals(se.getName())) {
+		LOG.info("session attributeRemoved " + se);
+		if ("userlogged".equals(se)) {
 			synchronized (this) {
 				userLoggedCount++;
-				listaUsariosLogeados.remove(se.getValue());
+				listaUsariosLogeados.remove(se);
 			}
 		}
 	}

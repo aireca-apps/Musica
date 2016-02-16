@@ -9,14 +9,15 @@
 <%@ page import="com.ipartek.formacion.proyecto.controladores.Mensaje"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 
-<c:set var="language" value="${cookie.cIdioma.value==''?'eu_ES':cookie.cIdioma.value }" />
+<c:set var="language"
+	value="${cookie.cIdioma.value==''?'eu_ES':cookie.cIdioma.value }" />
 <fmt:setLocale value="${language}" />
-<fmt:setBundle basename="i18nmesages" /> 
+<fmt:setBundle basename="i18nmesages" />
 
-<% 
-	if (DBListener.error == true){
+<%
+	if (DBListener.error == true) {
 		throw new Exception("No hay conexión con la base de datos");
-	}	
+	}
 %>
 
 <!DOCTYPE html>
@@ -25,13 +26,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ipartek SB_Admin</title>
+<title>Música</title>
 
 <!-- CSS -->
 <link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
 <link rel="stylesheet" href="js/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="fonts/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/style.css">
 <base href="${pageContext.request.contextPath}/" />
 
@@ -52,9 +54,9 @@
 
 
 <body>
-<div>
-<img src="img/bg.png" style="text-align: left;width: 160px" >
-</div>
+	<div>
+		<img src="img/bg.png" style="text-align: left; width: 160px">
+	</div>
 	<!-- Top content -->
 	<div class="top-content">
 
@@ -73,8 +75,12 @@
 					<div class="col-sm-6 col-sm-offset-3 form-box">
 						<div class="form-top">
 							<div class="form-top-left">
-								<h3><fmt:message key="login.info.enter"/></h3>
-								<p><fmt:message key="login.info"/></p>
+								<h3>
+									<fmt:message key="login.info.enter" />
+								</h3>
+								<p>
+									<fmt:message key="login.info" />
+								</p>
 							</div>
 							<div class="form-top-right">
 								<i class="fa fa-lock"></i>
@@ -86,14 +92,16 @@
 
 								<div class="form-group">
 									<label class="sr-only" for="form-username">Email</label> <input
-										type="email" id="email" name="email" placeholder="tuemail@email.com"
+										type="email" id="email" name="email"
+										placeholder="tuemail@email.com"
 										class="form-username form-control"
 										value="${cookie.cEmail.value}" required>
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="form-password">Contraseña</label> <input
-										id="password" type="password" name="password" placeholder="Contraseña..."
-										class="form-password form-control" required>
+										id="password" type="password" name="password"
+										placeholder="Contraseña..." class="form-password form-control"
+										required>
 								</div>
 								<div>
 									<label for="idioma"><fmt:message key="login.idioma" /></label>
@@ -108,9 +116,11 @@
 									</select>
 								</div>
 								<input type="checkbox" id="recuerdame" checked name="recuerdame"
-									value="1"> <fmt:message key="login.remember"/> <input
-									id="submit" type="submit" class="btn center-block"
-									style="margin-top: 20px; width: 50%;" value=<fmt:message key="login.boton"/> />
+									value="1">
+								<fmt:message key="login.remember" />
+								<input id="submit" type="submit" class="btn center-block"
+									style="margin-top: 20px; width: 50%;"
+									value=<fmt:message key="login.boton"/> />
 								<%
 									Mensaje mensaje = (Mensaje) request.getAttribute("msj");
 									if (session.getAttribute("msj") != null) {

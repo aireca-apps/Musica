@@ -6,7 +6,7 @@ import com.ipartek.formacion.proyecto.pojo.Grupo;
 
 public interface GrupoService {
 
-	Grupo accede(String email, String pass);
+	String accede(String email, String pass);
 
 	/**
 	 * Colección de Personas, limitado a las últimas 500

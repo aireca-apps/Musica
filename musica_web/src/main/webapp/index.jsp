@@ -17,7 +17,7 @@
 <div id="page-wrapper">
 	<div class="row">
 		<h1 class="page-header"><fmt:message key="index.cabecera"/>
-			${sessionScope.userlogged.nombre}</h1>
+			${sessionScope.userlogged}</h1>
 		<div class="row">
 			
 			<div class="col-lg-6 col-md-9">
@@ -97,45 +97,7 @@
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
-	<hr>
-	<!-- /.row -->
-	<div id="tablaGrupos" class="collapse">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="table-responsive">
-					<table
-						class="datatable table table-bordered table-hover table-striped">
-						<thead>
-							<tr>
-								<th>Nombre</th>
-								<th>Email</th>
-								<th>Estilo</th>
-							</tr>
-						</thead>
-						<tbody id="lista_user_logged">
-							<%
-								for ( Grupo per : SessionListener.listaUsariosLogeados ){
-							%>
-							<tr>
-								<td><a
-									href="<%=Constantes.CONTROLLER_GRUPOS%>?op=<%=Constantes.OP_DETALLE%>&id=<%=per.getId()%>"
-									title="Ir al detalle de <%=per.getNombre()%>"><%=per.getNombre()%></a></td>
-								<td><%=per.getEstilo()%></td>
-								<td><a
-									href="<%=Constantes.CONTROLLER_ESTILOS%>?op=<%=Constantes.OP_DETALLE%>&id=<%=per.getEstilo().getId()%>"
-									title="Ir al detalle de <%=per.getEstilo().getNombre()%>"
-									style="margin: 10px 0;"><%=per.getEstilo().getNombre()%></td>
-							</tr>
-							<%
-								} //end for
-							%>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /.row -->
+	<hr>	
 </div>
 <!-- /#page-wrapper -->
 <%@include file="includes/footer.jsp"%>
