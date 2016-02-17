@@ -19,7 +19,7 @@ public class EstiloServlet extends MasterServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static final String VIEW_LIST = "/pages/estilo/estiloList.jsp",
-								VIEW_FORM = "/pages/estilo/estiloDetalle.jsp";
+			VIEW_FORM = "/pages/estilo/estiloDetalle.jsp";
 	private static int operacion;
 
 	@Override
@@ -114,8 +114,7 @@ public class EstiloServlet extends MasterServlet {
 	}
 
 	private void nuevo(HttpServletRequest request) {
-		Estilo estilo = new Estilo();
-		request.setAttribute("estilo", estilo);
+		request.setAttribute("estilo", new Estilo());
 		dispatch = request.getRequestDispatcher(VIEW_FORM);
 	}
 

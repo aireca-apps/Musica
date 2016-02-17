@@ -15,9 +15,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.proyecto.Constantes;
-import com.ipartek.formacion.proyecto.pojo.Grupo;
-import com.ipartek.formacion.proyecto.service.GrupoService;
-import com.ipartek.formacion.proyecto.service.impl.GrupoServiceImpl;
+import com.ipartek.formacion.proyecto.pojo.Usuario;
+import com.ipartek.formacion.proyecto.service.UsuarioService;
+import com.ipartek.formacion.proyecto.service.impl.UsuarioServiceImpl;
 
 /**
  * Servlet implementation class loginServlet
@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private RequestDispatcher dispatch;
-	private static GrupoService servicioGrupo;
+	private static UsuarioService servicioUsuario;
 	private static Mensaje msj;
 	private HttpSession session;
 
@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		servicioGrupo = GrupoServiceImpl.getSingleton();
+		servicioUsuario = UsuarioServiceImpl.getSingleton();
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	@Override
 	public void destroy() {
-		servicioGrupo = null;
+		servicioUsuario = null;
 		msj = null;
 	}
 
@@ -93,13 +93,12 @@ public class LoginServlet extends HttpServlet {
 				String pPass = request.getParameter("password");
 				String pIdioma = request.getParameter("idioma");
 				boolean recordar = (request.getParameter("recuerdame") == null ? false : true);
-				String gru = servicioGrupo.accede(pEmail, pPass);
+				Usuario userlogged = servicioUsuario.accede(pEmail, pPass);
 
-				if (gru.equals("")) {
+				if (userlogged.equals(new Usuario())) {
 					msj = new Mensaje("Credenciales no válidas", Mensaje.TIPO_DANGER);
 					dispatch = request.getRequestDispatcher(Constantes.VIEW_LOGIN);
 				} else {
-					// guardar cookies
 					if (recordar) {
 						cEmail = new Cookie("cEmail", pEmail);
 						cLastVisit = new Cookie("cLastVisit", String.valueOf(System.currentTimeMillis()));
@@ -116,10 +115,10 @@ public class LoginServlet extends HttpServlet {
 					response.addCookie(cIdioma);
 
 					// Guardar en Session el Usuario
-					session.setAttribute(Constantes.SESSION_USER_LOGGED, gru);
+					session.setAttribute(Constantes.SESSION_USER_LOGGED, userlogged);
 					session.setAttribute(Constantes.SESSION_USER_LANGUAGE, pIdioma);
 
-					LOG.info(" logged: " + gru);
+					LOG.info(" logged: " + userlogged);
 					dispatch = request.getRequestDispatcher(Constantes.VIEW_INDEX);
 				}
 

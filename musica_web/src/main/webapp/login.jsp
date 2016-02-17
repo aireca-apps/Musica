@@ -115,6 +115,15 @@
 											<c:if test="${language == 'en_EN'}">selected</c:if>>English</option>
 									</select>
 								</div>
+								<div class="pull-right">
+									<div class="btn-group">
+										<a
+											href="<%=Constantes.CONTROLLER_USUARIOS%>?op=<%=Constantes.OP_NUEVO%>"
+											title="Crear registro"> <i class="fa fa-plus fa-fw"></i>
+											Regístrate
+										</a>
+									</div>
+								</div>
 								<input type="checkbox" id="recuerdame" checked name="recuerdame"
 									value="1">
 								<fmt:message key="login.remember" />

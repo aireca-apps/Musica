@@ -1,156 +1,179 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>TuMusica</display-name>
-  
-  <welcome-file-list>
-    <welcome-file>login.jsp</welcome-file>
-  </welcome-file-list>
-  
-  <servlet>
-    <description>Servlet Maestro para que hereden los demas servlet</description>
-    <display-name>MasterServlet</display-name>
-    <servlet-name>MasterServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.proyecto.controladores.MasterServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MasterServlet</servlet-name>
-    <url-pattern>/master</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description>Controlador para gestionar el login</description>
-    <display-name>LoginServlet</display-name>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.proyecto.controladores.LoginServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/loginUser</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description>Desconexion de sessiones de usuarios</description>
-    <display-name>LogoutServlet</display-name>
-    <servlet-name>LogoutServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.proyecto.controladores.LogoutServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LogoutServlet</servlet-name>
-    <url-pattern>/logout</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description>Controlador para gestionar las operaciones sobre grupos</description>
-    <display-name>GrupoServlet</display-name>
-    <servlet-name>GrupoServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.proyecto.controladores.GrupoServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GrupoServlet</servlet-name>
-    <url-pattern>/musica/grupos</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>SearchServlet</display-name>
-    <servlet-name>SearchServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.proyecto.controladores.SearchServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SearchServlet</servlet-name>
-    <url-pattern>/musica/search</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description>Controlador para gestionar las operaciones sobre estilos</description>
-    <display-name>EstiloServlet</display-name>
-    <servlet-name>EstiloServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.proyecto.controladores.EstiloServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>EstiloServlet</servlet-name>
-    <url-pattern>/musica/estilos</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>LoggedUserServlet</display-name>
-    <servlet-name>LoggedUserServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.proyecto.controladores.ajax.LoggedUserServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoggedUserServlet</servlet-name>
-    <url-pattern>/musica/loggeduser</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>CheckUserServlet</display-name>
-    <servlet-name>CheckUserServlet</servlet-name>
-    <servlet-class>com.ipartek.formacion.proyecto.controladores.ajax.CheckUserServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CheckUserServlet</servlet-name>
-    <url-pattern>/checkuser</url-pattern>
-  </servlet-mapping>
-  <listener>
-    <listener-class>com.ipartek.formacion.proyecto.listeners.InitListener</listener-class>
-  </listener>
-  <listener>
-    <listener-class>com.ipartek.formacion.proyecto.listeners.DBListener</listener-class>
-  </listener>  
-  <listener>
-    <listener-class>com.ipartek.formacion.proyecto.listeners.SessionListener</listener-class>
-  </listener>
-  
-  <filter>
-    <display-name>UserLoggedFilter</display-name>
-    <filter-name>UserLoggedFilter</filter-name>
-    <filter-class>com.ipartek.formacion.proyecto.seguridad.UserLoggedFilter</filter-class>
-    <init-param>
-      <description>paginas a excluir del filtro</description>
-      <param-name>excludeLogin</param-name>
-      <param-value>login.jsp</param-value>
-    </init-param>
-  </filter>
-  <filter-mapping>
-    <filter-name>UserLoggedFilter</filter-name>
-    <url-pattern>/musica/*</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>UserLoggedFilter</filter-name>
-    <url-pattern>*.jsp</url-pattern>
-  </filter-mapping>  
-  
-  <error-page>
-    <error-code>404</error-code>
-    <location>/pages/error/error-404.jsp</location>
-  </error-page>
-  <error-page>
-    <exception-type>java.lang.Throwable</exception-type>
-    <location>/pages/errores/error.jsp</location>
-  </error-page>
-  <session-config>
-    <session-timeout>20</session-timeout>
-  </session-config>
-  <servlet>
-    <display-name>Apache-Axis Servlet</display-name>
-    <servlet-name>AxisServlet</servlet-name>
-    <servlet-class>org.apache.axis.transport.http.AxisServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AxisServlet</servlet-name>
-    <url-pattern>/servlet/AxisServlet</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>AxisServlet</servlet-name>
-    <url-pattern>*.jws</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>AxisServlet</servlet-name>
-    <url-pattern>/services/*</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <display-name>Axis Admin Servlet</display-name>
-    <servlet-name>AdminServlet</servlet-name>
-    <servlet-class>org.apache.axis.transport.http.AdminServlet</servlet-class>
-    <load-on-startup>100</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AdminServlet</servlet-name>
-    <url-pattern>/servlet/AdminServlet</url-pattern>
-  </servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>TuMusica</display-name>
+
+	<welcome-file-list>
+		<welcome-file>login.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<description>Servlet Maestro para que hereden los demas servlet</description>
+		<display-name>MasterServlet</display-name>
+		<servlet-name>MasterServlet</servlet-name>
+		<servlet-class>com.ipartek.formacion.proyecto.controladores.MasterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MasterServlet</servlet-name>
+		<url-pattern>/master</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>Controlador para gestionar el login</description>
+		<display-name>LoginServlet</display-name>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.ipartek.formacion.proyecto.controladores.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/loginUser</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>Desconexion de sessiones de usuarios</description>
+		<display-name>LogoutServlet</display-name>
+		<servlet-name>LogoutServlet</servlet-name>
+		<servlet-class>com.ipartek.formacion.proyecto.controladores.LogoutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogoutServlet</servlet-name>
+		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>Controlador para gestionar las operaciones sobre grupos</description>
+		<display-name>GrupoServlet</display-name>
+		<servlet-name>GrupoServlet</servlet-name>
+		<servlet-class>com.ipartek.formacion.proyecto.controladores.GrupoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GrupoServlet</servlet-name>
+		<url-pattern>/musica/grupos</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>Controlador para gestionar los usuarios</description>
+		<display-name>UsuarioServlet</display-name>
+		<servlet-name>UsuarioServlet</servlet-name>
+		<servlet-class>com.ipartek.formacion.proyecto.controladores.UsuarioServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UsuarioServlet</servlet-name>
+		<url-pattern>/musica/usuarios</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>SearchServlet</display-name>
+		<servlet-name>SearchServlet</servlet-name>
+		<servlet-class>com.ipartek.formacion.proyecto.controladores.SearchServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchServlet</servlet-name>
+		<url-pattern>/musica/search</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>Controlador para gestionar las operaciones sobre estilos</description>
+		<display-name>EstiloServlet</display-name>
+		<servlet-name>EstiloServlet</servlet-name>
+		<servlet-class>com.ipartek.formacion.proyecto.controladores.EstiloServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EstiloServlet</servlet-name>
+		<url-pattern>/musica/estilos</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>LoggedUserServlet</display-name>
+		<servlet-name>LoggedUserServlet</servlet-name>
+		<servlet-class>com.ipartek.formacion.proyecto.controladores.ajax.LoggedUserServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoggedUserServlet</servlet-name>
+		<url-pattern>/musica/loggeduser</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>CheckUserServlet</display-name>
+		<servlet-name>CheckUserServlet</servlet-name>
+		<servlet-class>com.ipartek.formacion.proyecto.controladores.ajax.CheckUserServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckUserServlet</servlet-name>
+		<url-pattern>/checkuser</url-pattern>
+	</servlet-mapping>
+	<listener>
+		<listener-class>com.ipartek.formacion.proyecto.listeners.InitListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.ipartek.formacion.proyecto.listeners.DBListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.ipartek.formacion.proyecto.listeners.SessionListener</listener-class>
+	</listener>
+
+	<filter>
+		<display-name>UserLoggedFilter</display-name>
+		<filter-name>UserLoggedFilter</filter-name>
+		<filter-class>com.ipartek.formacion.proyecto.seguridad.UserLoggedFilter</filter-class>
+		<init-param>
+			<description>paginas a excluir del filtro</description>
+			<param-name>excludeLogin</param-name>
+			<param-value>login.jsp</param-value>			
+		</init-param>
+		<init-param>
+			<description>paginas a excluir del filtro</description>
+			<param-name>excludeRegistro</param-name>
+			<param-value>/musica/usuarios</param-value>			
+		</init-param>	
+		<init-param>
+			<description>paginas a excluir del filtro</description>
+			<param-name>excludeRegistro2</param-name>
+			<param-value>usuarioDetalle.jsp</param-value>			
+		</init-param>		
+	</filter>
+	<filter-mapping>
+		<filter-name>UserLoggedFilter</filter-name>
+		<url-pattern>/musica/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>UserLoggedFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/pages/error/error-404.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/pages/errores/error.jsp</location>
+	</error-page>
+	<session-config>
+		<session-timeout>20</session-timeout>
+	</session-config>
+	<servlet>
+		<display-name>Apache-Axis Servlet</display-name>
+		<servlet-name>AxisServlet</servlet-name>
+		<servlet-class>org.apache.axis.transport.http.AxisServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>/servlet/AxisServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>*.jws</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AxisServlet</servlet-name>
+		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<display-name>Axis Admin Servlet</display-name>
+		<servlet-name>AdminServlet</servlet-name>
+		<servlet-class>org.apache.axis.transport.http.AdminServlet</servlet-class>
+		<load-on-startup>100</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminServlet</servlet-name>
+		<url-pattern>/servlet/AdminServlet</url-pattern>
+	</servlet-mapping>
 </web-app>

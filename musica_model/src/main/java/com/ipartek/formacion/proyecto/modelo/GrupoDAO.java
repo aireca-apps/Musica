@@ -14,23 +14,6 @@ import com.ipartek.formacion.proyecto.pojo.Grupo;
 
 public class GrupoDAO extends AbstractPersistible<Grupo> {
 
-	public String login(String email, String pass) throws SQLException {
-		String resultado = null;
-		DbConnection conn = new DbConnection();
-
-		// para llamar a un procedimiento creado en heidi
-		String sql = "{call login (?, ?)}";
-		CallableStatement consulta = conn.getConnection().prepareCall(sql);
-		consulta.setString(1, email);
-		consulta.setString(2, pass);
-		ResultSet rs = consulta.executeQuery();
-		while (rs.next()) {
-			resultado = rs.getString("nick");
-		}
-		cerrarConsulta(rs, conn, consulta);
-		return resultado;
-	}
-
 	@Override
 	public List<Grupo> getAll() throws SQLException {
 		// Se abre conexión
@@ -106,7 +89,7 @@ public class GrupoDAO extends AbstractPersistible<Grupo> {
 	@Override
 	public boolean update(Grupo gru) throws SQLException {
 		boolean resul = false;
-		if (gru != null && !gru.equals(new Grupo())) {
+		if ((gru != null) && !gru.equals(new Grupo())) {
 			DbConnection conn = new DbConnection();
 			String sql = "update `grupo` set nombre = ?, componentes = ?, fecha_inicio = ?,  fecha_fin = ?, estilo_id = ? where `id` = ? ;";
 			PreparedStatement consulta = conn.getConnection().prepareStatement(sql);
@@ -127,7 +110,7 @@ public class GrupoDAO extends AbstractPersistible<Grupo> {
 	public int insert(Grupo gru) throws SQLException {
 		int resul = -1;
 		// Se abre conexión
-		if (gru != null && !gru.equals(new Grupo())) {
+		if ((gru != null) && !gru.equals(new Grupo())) {
 			DbConnection conn = new DbConnection();
 			String sql = "INSERT INTO `grupo` (`nombre`, `componentes`, `fecha_inicio`, `fecha_fin`, `estilo_id`) VALUES (?,?,?,?,?);";
 			PreparedStatement consulta = conn.getConnection().prepareStatement(sql,

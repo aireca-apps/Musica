@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               5.7.9 - MySQL Community Server (GPL)
--- Server OS:                    Win64
--- HeidiSQL Version:             9.3.0.5049
+-- Versión del servidor:         5.6.17 - MySQL Community Server (GPL)
+-- SO del servidor:              Win64
+-- HeidiSQL Versión:             9.3.0.5048
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -12,12 +12,12 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- Dumping database structure for aitor
+-- Volcando estructura de base de datos para aitor
 DROP DATABASE IF EXISTS `aitor`;
 CREATE DATABASE IF NOT EXISTS `aitor` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `aitor`;
 
--- Dumping structure for table aitor.estilo
+-- Volcando estructura para tabla aitor.estilo
 DROP TABLE IF EXISTS `estilo`;
 CREATE TABLE IF NOT EXISTS `estilo` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -25,18 +25,19 @@ CREATE TABLE IF NOT EXISTS `estilo` (
   `descripcion` varchar(255) DEFAULT NULL,
   `codigo` varchar(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=utf8 COMMENT='Tabla Auxiliar para gestión de roles de usuarios';
+) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8 COMMENT='Tabla Auxiliar para gestión de roles de usuarios';
 
--- Dumping data for table aitor.estilo: ~4 rows (approximately)
+-- Volcando datos para la tabla aitor.estilo: ~4 rows (aproximadamente)
+DELETE FROM `estilo`;
 /*!40000 ALTER TABLE `estilo` DISABLE KEYS */;
-REPLACE INTO `estilo` (`id`, `nombre`, `descripcion`, `codigo`) VALUES
+INSERT INTO `estilo` (`id`, `nombre`, `descripcion`, `codigo`) VALUES
 	(1, 'Soul', '<p>m&uacute;sica Soul</p>', 'SO'),
 	(2, 'Rock', '<p>m&uacute;sica Jazz</p>', 'RC'),
 	(3, 'jazz', 'música Jazz', 'JZ'),
 	(4, 'Folk', '<p>M&uacute;sica Folk</p>', 'FK');
 /*!40000 ALTER TABLE `estilo` ENABLE KEYS */;
 
--- Dumping structure for procedure aitor.getById
+-- Volcando estructura para procedimiento aitor.getById
 DROP PROCEDURE IF EXISTS `getById`;
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getById`(IN `pid` INT)
@@ -58,7 +59,7 @@ where g.`id` = pid;
 END//
 DELIMITER ;
 
--- Dumping structure for procedure aitor.getGrupos
+-- Volcando estructura para procedimiento aitor.getGrupos
 DROP PROCEDURE IF EXISTS `getGrupos`;
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getGrupos`(IN `pLimite` INT)
@@ -81,7 +82,7 @@ order by g.`id` LIMIT pLimite;
 END//
 DELIMITER ;
 
--- Dumping structure for table aitor.grupo
+-- Volcando estructura para tabla aitor.grupo
 DROP TABLE IF EXISTS `grupo`;
 CREATE TABLE IF NOT EXISTS `grupo` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'identificador',
@@ -91,30 +92,31 @@ CREATE TABLE IF NOT EXISTS `grupo` (
   `fecha_fin` date DEFAULT NULL COMMENT 'fecha de disolución del grupo',
   `estilo_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=338 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=378 DEFAULT CHARSET=utf8;
 
--- Dumping data for table aitor.grupo: 4 rows
+-- Volcando datos para la tabla aitor.grupo: 4 rows
+DELETE FROM `grupo`;
 /*!40000 ALTER TABLE `grupo` DISABLE KEYS */;
-REPLACE INTO `grupo` (`id`, `nombre`, `componentes`, `fecha_inicio`, `fecha_fin`, `estilo_id`) VALUES
+INSERT INTO `grupo` (`id`, `nombre`, `componentes`, `fecha_inicio`, `fecha_fin`, `estilo_id`) VALUES
 	(320, 'qwqweqweqw', '<p>qweqweq</p>', '2016-02-02', NULL, 1),
 	(321, 'aaaaaaaaaaaaa', '<p>aaaaaaaaaaaaaaaaaa</p>', '2016-02-03', '2016-02-03', 3),
 	(1, 'email@email.com', 'asda', '2016-02-08', NULL, 1),
 	(301, 'Metallica', '<p>son cuatro</p>', '2016-02-06', '2016-02-12', 2);
 /*!40000 ALTER TABLE `grupo` ENABLE KEYS */;
 
--- Dumping structure for procedure aitor.login
+-- Volcando estructura para procedimiento aitor.login
 DROP PROCEDURE IF EXISTS `login`;
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `login`(IN `pEmail` VARCHAR(50), IN `pPass` INT)
 BEGIN
 select
-nick
-from `usuarios` WHERE email = pEmail and pass = pPass;
+id, nick, email, pass
+from `usuario` WHERE email = pEmail and pass = pPass;
 
 END//
 DELIMITER ;
 
--- Dumping structure for procedure aitor.searchGrupos
+-- Volcando estructura para procedimiento aitor.searchGrupos
 DROP PROCEDURE IF EXISTS `searchGrupos`;
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `searchGrupos`(IN `pdato` VARCHAR(250))
@@ -144,20 +146,24 @@ ORDER BY g.`id`;
 END//
 DELIMITER ;
 
--- Dumping structure for table aitor.usuarios
-DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE IF NOT EXISTS `usuarios` (
+-- Volcando estructura para tabla aitor.usuario
+DROP TABLE IF EXISTS `usuario`;
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(250) NOT NULL,
   `pass` varchar(250) NOT NULL,
   `nick` varchar(250) NOT NULL,
-  PRIMARY KEY (`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
--- Dumping data for table aitor.usuarios: 1 rows
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-REPLACE INTO `usuarios` (`email`, `pass`, `nick`) VALUES
-	('correo@correo.com', '123', 'Aitor');
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+-- Volcando datos para la tabla aitor.usuario: 1 rows
+DELETE FROM `usuario`;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` (`id`, `email`, `pass`, `nick`) VALUES
+	(1, 'correo@correo.com', '123', 'Aitor'),
+	(2, 'otrocorreo@correo.com', '123456', 'Jefe'),
+	(3, 'loquesea@loquesea.com', '123456', 'Mi nick');
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

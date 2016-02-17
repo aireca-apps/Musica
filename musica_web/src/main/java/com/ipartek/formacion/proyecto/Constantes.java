@@ -36,6 +36,7 @@ public final class Constantes {
 	public static final String CONTROLLER_LOGOUT = "logout";
 
 	public static final String CONTROLLER_USUARIOS_LOGEADOS = "musica/loggeduser";
+	public static final String CONTROLLER_USUARIOS = "musica/usuarios";
 
 	public static final String CONTROLLER_GRUPOS = "musica/grupos";
 	public static final String CONTROLLER_ESTILOS = "musica/estilos";
@@ -49,4 +50,6 @@ public final class Constantes {
 	public static final String VIEW_GRUPO_FORM = "/pages/grupo/grupoDetalle.jsp";
 	public static final String VIEW_GRUPO_SEARCH = "/pages/searchResult.jsp";
 
+	public static final String VIEW_USER_LIST = "/pages/usuario/usuarioList.jsp";
+	public static final String VIEW_USER_FORM = "/pages/usuario/usuarioDetalle.jsp";
 }

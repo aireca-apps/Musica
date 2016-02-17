@@ -122,6 +122,10 @@
 			</div>
 						
 			<input type="hidden" name="id" value="<%=per.getId()%>">
+			<input type="hidden" name="nombre-hid" id="nombre-hid" value="<%=per.getNombre()%>">
+			<input type="hidden" name="componentes-hid" value="<%=per.getComponentes()%>">	
+			<input type="hidden" name="fechaInicio-hid" value="<%=per.getFechaInicio()%>">
+			<input type="hidden" name="fechaFin-hid" value="<%=per.getFechaFin()%>">
 			<input type="hidden" name="op" value="<%=Constantes.OP_MODIFICAR%>">
 
 			<div class="form-group">

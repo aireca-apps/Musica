@@ -109,17 +109,4 @@ public class GrupoServiceImpl implements GrupoService {
 		}
 		return gru;
 	}
-
-	@Override
-	public String accede(String email, String pass) {
-		String gru = "";
-		try {
-			gru = daoGrupo.login(email, pass);
-		} catch (SQLException e) {
-			// TODO log
-			e.printStackTrace();
-		}
-		return gru;
-	}
-
 }

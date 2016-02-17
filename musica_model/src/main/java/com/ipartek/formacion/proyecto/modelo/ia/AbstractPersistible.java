@@ -7,8 +7,8 @@ import java.sql.Statement;
 import com.ipartek.formacion.proyecto.modelo.DbConnection;
 
 public abstract class AbstractPersistible<P> implements InterfacePersistable<P> {
-	
-	public void cerrarConsulta(ResultSet rs, DbConnection conn, Statement consulta) {
+
+	public static void cerrarConsulta(ResultSet rs, DbConnection conn, Statement consulta) {
 		try {
 			rs.close();
 			consulta.close();
@@ -19,7 +19,7 @@ public abstract class AbstractPersistible<P> implements InterfacePersistable<P> 
 		}
 	}
 
-	public void cerrarPeticion(DbConnection conn, Statement consulta) {
+	public static void cerrarPeticion(DbConnection conn, Statement consulta) {
 		try {
 			consulta.close();
 			conn.desconectar();

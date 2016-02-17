@@ -2,16 +2,20 @@ package com.ipartek.formacion.proyecto.service;
 
 import java.util.List;
 
-import com.ipartek.formacion.proyecto.pojo.Grupo;
+import com.ipartek.formacion.proyecto.pojo.Usuario;
 
-public interface GrupoService {
+public interface UsuarioService {
+
+	Usuario accede(String email, String pass);
+
+	boolean comprobar(String campo, String valor);
 
 	/**
 	 * Colección de Personas, limitado a las últimas 500
 	 *
 	 * @return @{code List<Persona>} listado personas, si no existe lista vacía
 	 */
-	List<Grupo> listar();
+	List<Usuario> listar();
 
 	/**
 	 * Colección de Personas, limitado a las últimas 500
@@ -19,7 +23,7 @@ public interface GrupoService {
 	 * @return @{code boolean} true en caso de que se inserte, false en caso
 	 *         contrario
 	 */
-	boolean insertar(Grupo gru);
+	boolean insertar(Usuario usu);
 
 	/**
 	 * Colección de Personas, limitado a las últimas 500
@@ -27,7 +31,7 @@ public interface GrupoService {
 	 * @return @{code boolean} true en caso de que se elimine, false en caso
 	 *         contrario
 	 */
-	boolean eliminar(Grupo gru);
+	boolean eliminar(Usuario usu);
 
 	/**
 	 * Colección de Personas, limitado a las últimas 500
@@ -35,18 +39,7 @@ public interface GrupoService {
 	 * @return @{code boolean} true en caso de que se modifique, false en caso
 	 *         contrario
 	 */
-	boolean modificar(Grupo gru);
-
-	/**
-	 * Busca persona por cualquier propiedad
-	 *
-	 * @param criterio
-	 *            {@code String} cadena alfanumérica, no perite expresiones
-	 *            regulares
-	 * @return @{code List<Persona>} listado personas que coincidan con el
-	 *         criterio, si no existe lista vacía
-	 */
-	List<Grupo> buscar(String criterio);
+	boolean modificar(Usuario usu);
 
 	/**
 	 * TODO acabar la descripcion
@@ -54,5 +47,6 @@ public interface GrupoService {
 	 * @param id
 	 * @return
 	 */
-	Grupo detalle(int id);
+	Usuario detalle(int id);
+
 }

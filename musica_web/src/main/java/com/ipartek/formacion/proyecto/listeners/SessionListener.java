@@ -10,16 +10,15 @@ import javax.servlet.http.HttpSessionListener;
 
 import org.apache.log4j.Logger;
 
-import com.ipartek.formacion.proyecto.pojo.Grupo;
+import com.ipartek.formacion.proyecto.pojo.Usuario;
 
-public class SessionListener implements HttpSessionListener,
-HttpSessionAttributeListener {
+public class SessionListener implements HttpSessionListener, HttpSessionAttributeListener {
 
 	private final static Logger LOG = Logger.getLogger(SessionListener.class);
 
 	private int sessionCount = 0;
 	private int userLoggedCount = 0;
-	public static ArrayList<String> listaUsariosLogeados = new ArrayList<String>();
+	public static ArrayList<Usuario> listaUsariosLogeados = new ArrayList<Usuario>();
 	private ServletContext sc;
 
 	@Override
@@ -52,10 +51,10 @@ HttpSessionAttributeListener {
 
 		LOG.info("session attributeAdded " + se.getName());
 
-		if ("userlogged".equals(se)) {
+		if ("userlogged".equals(se.getName())) {
 			synchronized (this) {
 				userLoggedCount++;
-				listaUsariosLogeados.add((String) se.getValue());
+				listaUsariosLogeados.add((Usuario) se.getValue());
 			}
 		}
 
@@ -64,11 +63,11 @@ HttpSessionAttributeListener {
 	@Override
 	public void attributeRemoved(HttpSessionBindingEvent se) {
 
-		LOG.info("session attributeRemoved " + se);
-		if ("userlogged".equals(se)) {
+		LOG.info("session attributeRemoved " + se.getName());
+		if ("userlogged".equals(se.getName())) {
 			synchronized (this) {
 				userLoggedCount++;
-				listaUsariosLogeados.remove(se);
+				listaUsariosLogeados.remove(se.getValue());
 			}
 		}
 	}
