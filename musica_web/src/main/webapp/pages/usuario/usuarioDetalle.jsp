@@ -112,7 +112,7 @@
 							usuario</h4>
 					</div>
 					<div id="nuevaAventura" class="modal-body">
-						<form method="post" action="back/usuarios">
+						<form method="post" action="<%=Constantes.CONTROLLER_USUARIOS%>">
 							<div class="form-group">
 								<input type="hidden" name="op"
 									value="<%=Constantes.OP_ELIMINAR%>"> <input

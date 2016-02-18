@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.google.gson.Gson;
 import com.ipartek.formacion.proyecto.listeners.SessionListener;
 
@@ -16,6 +18,7 @@ import com.ipartek.formacion.proyecto.listeners.SessionListener;
  */
 public class LoggedUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final static Logger LOG = Logger.getLogger(LoggedUserServlet.class);
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -24,6 +27,7 @@ public class LoggedUserServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		LOG.trace("LoggedUserServlet: doGet llama a do Post");
 		doPost(request, response);
 	}
 
@@ -34,7 +38,7 @@ public class LoggedUserServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		LOG.trace("LoggedUserServlet: doPost");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
 

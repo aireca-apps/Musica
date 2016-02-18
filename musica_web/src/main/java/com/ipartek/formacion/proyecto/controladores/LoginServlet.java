@@ -95,7 +95,7 @@ public class LoginServlet extends HttpServlet {
 				boolean recordar = (request.getParameter("recuerdame") == null ? false : true);
 				Usuario userlogged = servicioUsuario.accede(pEmail, pPass);
 
-				if (userlogged.equals(new Usuario())) {
+				if (userlogged.getId() == -1) {
 					msj = new Mensaje("Credenciales no válidas", Mensaje.TIPO_DANGER);
 					dispatch = request.getRequestDispatcher(Constantes.VIEW_LOGIN);
 				} else {

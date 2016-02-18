@@ -34,6 +34,7 @@
 								<tbody>
 									<%
 										//recoger "atributo listado personas de la request
+										
 										ArrayList<Usuario> lista = (ArrayList<Usuario>) request.getAttribute("listaUsuarios");
 										if (lista == null)
 											lista = new ArrayList<Usuario>();
@@ -44,7 +45,7 @@
 									<tr>
 										<td><%=i%></td>
 										<%
-											if (usu.equals(session.getAttribute("userlogged"))) {
+											if (usu.getId() == ((Usuario)session.getAttribute("userlogged")).getId()) {
 										%>
 										<td><a
 											href="<%=Constantes.CONTROLLER_USUARIOS%>?op=<%=Constantes.OP_DETALLE%>&id=<%=usu.getId()%>"
@@ -59,7 +60,7 @@
 										<td><%=usu.getEmail()%></td>
 									</tr>
 									<%
-										} //end for
+										}//end for
 									%>
 								</tbody>
 							</table>

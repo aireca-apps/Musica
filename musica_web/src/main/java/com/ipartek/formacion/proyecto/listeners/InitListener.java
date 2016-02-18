@@ -35,7 +35,7 @@ public class InitListener implements ServletContextListener {
 			PropertyConfigurator.configure(prop);
 			LOG.trace("Contexto Servlet arrancado");
 		} catch (Exception e) {
-
+			LOG.trace("InitListener error: " + e.getMessage());
 		}
 	}
 

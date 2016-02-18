@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.proyecto.Constantes;
 import com.ipartek.formacion.proyecto.service.EstiloService;
 import com.ipartek.formacion.proyecto.service.GrupoService;
@@ -27,6 +29,7 @@ import com.ipartek.formacion.proyecto.service.impl.UsuarioServiceImpl;
 public class MasterServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private final static Logger LOG = Logger.getLogger(MasterServlet.class);
 	protected static GrupoService servicioGrupo;
 	protected static EstiloService serviceEstilo;
 	protected static UsuarioService serviceUsuario;
@@ -47,6 +50,7 @@ public class MasterServlet extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
+		LOG.trace("MasterServlet: init");
 		servicioGrupo = GrupoServiceImpl.getSingleton();
 		serviceEstilo = EstiloServiceImpl.getSingleton();
 		serviceUsuario = UsuarioServiceImpl.getSingleton();
@@ -57,6 +61,7 @@ public class MasterServlet extends HttpServlet {
 	 */
 	@Override
 	public void destroy() {
+		LOG.trace("MasterServlet: destroy");
 		servicioGrupo = null;
 		serviceEstilo = null;
 		serviceUsuario = null;
@@ -72,6 +77,7 @@ public class MasterServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		LOG.trace("MasterServlet: service");
 		try {
 			request.setCharacterEncoding("UTF-8");
 			msj = null;

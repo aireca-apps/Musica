@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.proyecto.Constantes;
 import com.ipartek.formacion.proyecto.pojo.Estilo;
 import com.ipartek.formacion.proyecto.pojo.Grupo;
@@ -21,6 +23,7 @@ import com.ipartek.formacion.proyecto.pojo.Grupo;
 public class GrupoServlet extends MasterServlet {
 
 	private static final long serialVersionUID = 8772839050207508062L;
+	private final static Logger LOG = Logger.getLogger(GrupoServlet.class);
 
 	private static String pId; // Parámetro identificador del grupo, aunque
 								// sea un id, es un string, luego se parsea
@@ -33,7 +36,7 @@ public class GrupoServlet extends MasterServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		LOG.trace("GrupoServlet: doGet");
 		try {
 			// recoger parámetros a realizar
 			if (request.getParameter("op") != null)
@@ -60,13 +63,11 @@ public class GrupoServlet extends MasterServlet {
 				break;
 			}
 			request.setAttribute("msj", msj);
+			LOG.trace("GrupoServlet: Se procede a realizar el dispatch");
 
 			dispatch.forward(request, response);
 		} catch (Exception e) {
-			// TODO mejor en un LOG
-			e.printStackTrace();
-
-			// TODO ir a página error 404.jsp o 500.jsp
+			LOG.error("GrupoServlet: " + e.getMessage());
 		}
 	}
 
@@ -78,7 +79,7 @@ public class GrupoServlet extends MasterServlet {
 	 * @throws SQLException
 	 */
 	private void modificarCrear(HttpServletRequest request) throws ParseException, SQLException {
-
+		LOG.trace("GrupoServlet: modificarCrear");
 		// recoger parámetros formulario
 		int id = Integer.parseInt(request.getParameter("id")),
 				estiloId = Integer.parseInt(request.getParameter("estilo"));
@@ -101,17 +102,23 @@ public class GrupoServlet extends MasterServlet {
 			}
 			// persistir en la bbdd
 			if (gru.getId() == -1) {
-				if (servicioGrupo.insertar(gru))
+				if (servicioGrupo.insertar(gru)) {
 					msj = new Mensaje("Grupo insertado con éxito", Mensaje.TIPO_SUCCESS);
-				else
+					LOG.trace("GrupoServlet: Grupo " + gru.toString() + " insertado con éxito");
+				} else {
 					msj = new Mensaje("No se ha insertado el grupo", Mensaje.TIPO_WARNING);
+					LOG.error("GrupoServlet: Grupo " + gru.toString() + " no insertado");
+				}
 			} else if (servicioGrupo.modificar(gru)) {
 				msj = new Mensaje("Registro modificado con éxito", Mensaje.TIPO_SUCCESS);
+				LOG.trace("GrupoServlet: Grupo " + gru.toString() + " modificado con éxito");
 			} else {
 				msj = new Mensaje("No se ha modificado el registro", Mensaje.TIPO_WARNING);
+				LOG.error("GrupoServlet: Grupo " + gru.toString() + " no modificado");
 			}
 		} else {
-			msj = new Mensaje("No existe dicho estilo", Mensaje.TIPO_WARNING);
+			msj = new Mensaje("No existe dicho grupo", Mensaje.TIPO_WARNING);
+			LOG.error("No existe dicho grupo");
 		}
 		// listar
 		listar(request);
@@ -124,14 +131,18 @@ public class GrupoServlet extends MasterServlet {
 			if (gru.getId() != -1) {
 				if (servicioGrupo.eliminar(gru)) {
 					msj = new Mensaje("Registro eliminado con éxito", Mensaje.TIPO_SUCCESS);
+					LOG.trace("GrupoServlet: Grupo " + gru.toString() + " eliminado con éxito");
 				} else {
 					msj = new Mensaje("No se ha eliminado el registro", Mensaje.TIPO_DANGER);
+					LOG.error("GrupoServlet: Grupo " + gru.toString() + " no eliminado");
 				}
 			} else {
 				msj = new Mensaje("No existe un grupo con ese registro", Mensaje.TIPO_DANGER);
+				LOG.error("No existe dicho grupo");
 			}
 		} catch (Exception e) {
 			msj = new Mensaje("No se ha eliminado el registro", Mensaje.TIPO_DANGER);
+			LOG.error("GrupoServlet: " + e.getMessage());
 		}
 		listar(request);
 	}
@@ -146,11 +157,13 @@ public class GrupoServlet extends MasterServlet {
 		request.setAttribute("grupo", new Grupo());
 		ArrayList<Estilo> estilos = (ArrayList<Estilo>) serviceEstilo.listar();
 		request.setAttribute("estilos", estilos);
+		LOG.trace("GrupoServlet: Solicitud de nuevo estilo");
 		dispatch = request.getRequestDispatcher(Constantes.VIEW_GRUPO_FORM);
 	}
 
 	private void listar(HttpServletRequest request) throws SQLException {
 		request.setAttribute("listaGrupos", servicioGrupo.listar());
+		LOG.trace("GrupoServlet: Solicitud para listar todos los estilos");
 		dispatch = request.getRequestDispatcher(Constantes.VIEW_GRUPO_LIST);
 	}
 
@@ -159,6 +172,7 @@ public class GrupoServlet extends MasterServlet {
 		request.setAttribute("grupo", servicioGrupo.detalle(Integer.parseInt(pId)));
 		ArrayList<Estilo> estilos = (ArrayList<Estilo>) serviceEstilo.listar();
 		request.setAttribute("estilos", estilos);
+		LOG.trace("GrupoServlet: Solicitud de estilo ");
 		dispatch = request.getRequestDispatcher(Constantes.VIEW_GRUPO_FORM);
 	}
 
@@ -169,6 +183,7 @@ public class GrupoServlet extends MasterServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		LOG.trace("GrupoServlet: doPost llama a doGet");
 		doGet(request, response);
 	}
 

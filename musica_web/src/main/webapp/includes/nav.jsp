@@ -40,7 +40,7 @@
 						key="index.lateral.estilos" /></a></li>
 			<li><a href="<%=Constantes.CONTROLLER_USUARIOS%>"><i
 					class="fa fa-graduation-cap fa-fw"></i> <fmt:message
-						key="Usuarios" /></a></li>
+						key="index.lateral.usuarios" /></a></li>
 		</ul>
 	</div>
 	<!-- /.sidebar-collapse -->

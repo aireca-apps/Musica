@@ -28,6 +28,7 @@ public class SearchServlet extends MasterServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		LOG.trace("SearchServlet: doGet llama a doProcess");
 		doProcess(request, response);
 	}
 
@@ -38,6 +39,7 @@ public class SearchServlet extends MasterServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		LOG.trace("SearchServlet: doPost llama a doProcess");
 		doProcess(request, response);
 	}
 

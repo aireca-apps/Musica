@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.proyecto.controladores.MasterServlet;
 
 /**
@@ -15,6 +17,7 @@ import com.ipartek.formacion.proyecto.controladores.MasterServlet;
  */
 public class CheckUserServlet extends MasterServlet {
 	private static final long serialVersionUID = 1L;
+	private final static Logger LOG = Logger.getLogger(CheckUserServlet.class);
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -23,6 +26,7 @@ public class CheckUserServlet extends MasterServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		LOG.trace("CheckUserServlet: doGet");
 		try {
 			response.setCharacterEncoding("utf-8");
 			response.setContentType("application/json");
@@ -34,8 +38,7 @@ public class CheckUserServlet extends MasterServlet {
 			out.print(serviceUsuario.comprobar(campo, valor));
 			out.flush();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.error("CheckUserServlet: error: " + e.getMessage());
 		}
 	}
 }
